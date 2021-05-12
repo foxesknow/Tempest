@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempest.Expressions", "Tempest.Expressions\Tempest.Expressions.csproj", "{F52874CF-5FC7-4E9E-B299-3ED26AD51802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Tempest.Expressions", "Tests.Tempest.Expressions\Tests.Tempest.Expressions.csproj", "{E174F4BD-9684-46CE-B6B8-3E89BF3B549A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F52874CF-5FC7-4E9E-B299-3ED26AD51802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52874CF-5FC7-4E9E-B299-3ED26AD51802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52874CF-5FC7-4E9E-B299-3ED26AD51802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F52874CF-5FC7-4E9E-B299-3ED26AD51802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E174F4BD-9684-46CE-B6B8-3E89BF3B549A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E174F4BD-9684-46CE-B6B8-3E89BF3B549A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E174F4BD-9684-46CE-B6B8-3E89BF3B549A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E174F4BD-9684-46CE-B6B8-3E89BF3B549A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2AA5D18-0620-4C88-A158-35BADF9FBAA9}
+	EndGlobalSection
+EndGlobal
