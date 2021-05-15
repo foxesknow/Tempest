@@ -22,8 +22,8 @@ namespace Tempest.Expressions
             var (@break, @continue) = MakeBreakAndContinueLabels();
             var repeat = MakeLabel("repeat");
 
-            var counter = Expression.Variable(typeof(int));
-            var initializer = Expression.Assign(counter, Expression.Constant(0));
+            var counter = Variable<int>("repeatCount");
+            var initializer = Expression.Assign(counter, Constants.Int.Int_0);
 
             var ifBody = bodyBuilder(@break, @continue);
 

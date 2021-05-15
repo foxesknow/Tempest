@@ -16,7 +16,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_1()
         {
-            var counter = Expression.Variable(typeof(int), "a");
+            var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = ExpressionEx.Repeat(5, (b, c) => Expression.PreIncrementAssign(counter));
@@ -38,7 +38,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_2()
         {
-            var counter = Expression.Variable(typeof(int), "a");
+            var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = ExpressionEx.Repeat(5, (b, c) => 
@@ -67,7 +67,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_break()
         {
-            var counter = Expression.Variable(typeof(int), "a");
+            var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = ExpressionEx.Repeat(5, (b, c) => 
@@ -100,7 +100,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_continue()
         {
-            var counter = Expression.Variable(typeof(int), "a");
+            var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = ExpressionEx.Repeat(5, (b, c) => 
