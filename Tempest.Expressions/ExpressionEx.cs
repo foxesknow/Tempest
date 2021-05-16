@@ -69,5 +69,41 @@ namespace Tempest.Expressions
         {
             return Expression.Convert(expression, typeof(T));
         }
+
+        /// <summary>
+        /// Extracts the MethodInfo from a lambda representing a method call
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="delegate"></param>
+        /// <returns></returns>
+        public static MethodInfo GetMethod<T>(Expression<T> @delegate) where T : Delegate
+        {
+            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+
+            if(@delegate is LambdaExpression lambda && lambda.Body is MethodCallExpression methodCall)
+            {
+                return methodCall.Method;
+            }
+
+            throw new ArgumentException("not a method call", nameof(@delegate));
+        }
+
+        /// <summary>
+        /// Extracts the PropertyInfo from a lamda representing a property access
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="delegate"></param>
+        /// <returns></returns>
+        public static PropertyInfo GetProperty<T>(Expression<T> @delegate) where T : Delegate
+        {
+            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+
+            if(@delegate is LambdaExpression lambda && lambda.Body is MemberExpression member && member.Member is PropertyInfo property)
+            {
+                return property;
+            }
+
+            throw new ArgumentException("not a property call", nameof(@delegate));
+        }
     }
 }

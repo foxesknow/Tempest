@@ -10,8 +10,7 @@ using Tempest.Expressions;
 using NUnit.Framework;
 
 namespace Tests.Tempest.Expressions
-{
-    [TestFixture]
+{    
     public partial class ExpressionExTests
     {
         [Test]

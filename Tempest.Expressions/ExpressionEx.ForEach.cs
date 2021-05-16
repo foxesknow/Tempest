@@ -15,7 +15,12 @@ namespace Tempest.Expressions
         /// Creates a foreach expression that enumerates over a sequence
         /// </summary>
         /// <example>
-        /// <code></code>
+        /// <code>
+        /// foreach(som-var in sequence)
+        /// {
+        ///     body
+        /// }
+        /// </code>
         /// </example>
         /// <param name="sequence"></param>
         /// <param name="bodyBuilder"></param>

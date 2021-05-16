@@ -1,10 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
+
+using Tempest.Expressions;
+
+using NUnit.Framework;
 
 namespace Tests.Tempest.Expressions
 {
+    [TestFixture]
     public partial class ExpressionExTests
     {
-        private static readonly MethodInfo s_ConsoleWriteLine = typeof(Console).GetMethod("WriteLine", new[]{typeof(object)})!;
+        [Test]
+        public void Foo()
+        {
+            DoIt(() => Console.ReadLine());
+        }
+
+        void DoIt<T>(Expression<Func<T>> function)
+        {
+        }
     }
 }

@@ -18,10 +18,13 @@ namespace Tests.Tempest.Expressions
         {
             var parameter = ExpressionEx.Parameter<List<string>>();
 
+            Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
+            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+
             var body = ExpressionEx.ForEach
             (
                 parameter,
-                (v, b, c) => Expression.Call(null, s_ConsoleWriteLine, v)
+                (v, b, c) => Expression.Call(null, writeLine, v)
             );
 
             var lambda = Expression.Lambda<Action<List<string>>>(body, parameter);

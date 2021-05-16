@@ -10,7 +10,7 @@ namespace Tempest.Expressions
     public static partial class ExpressionEx
     {
         /// <summary>
-        /// Creates an expresson that runs forever, or until some breaks out of the loop
+        /// Creates an expresson that runs forever, or until something breaks out of the loop
         /// </summary>
         /// <example>
         /// <code>

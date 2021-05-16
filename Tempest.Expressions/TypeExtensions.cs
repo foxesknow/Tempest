@@ -10,6 +10,16 @@ namespace Tempest.Expressions
 {
     public static class TypeExtensions
     {
+        public  static MethodInfo GetMethod(this Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
+        {
+            if(type == null) throw new ArgumentNullException(nameof(type));
+
+            var method = type.GetMethod(name, bindingFlags, null, parameters, null);
+            if(method == null) throw new ArgumentException($"could not find method {name}");
+
+            return method;
+        }
+
         public static bool TryGetGenericImplementation(this Type type, Type genericType, [NotNullWhen(true)] out Type? implementation)
         {
             if(type == null) throw new ArgumentNullException(nameof(type));
@@ -86,6 +96,11 @@ namespace Tempest.Expressions
             }
 
             throw new ArgumentException("not an integral type", nameof(type));
+        }
+
+        public static bool IsSigned(this Type type)
+        {
+            return IsUnsigned(type) == false;
         }
 
         public static int IntegralSize(this Type type)
