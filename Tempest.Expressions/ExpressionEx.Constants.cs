@@ -29,7 +29,7 @@ namespace Tempest.Expressions
             /// <returns></returns>
             public static ConstantExpression Null<T>() where T : class
             {
-                return NullFactory<T>.Value;
+                return DefaultForFactory<T>.Value;
             }
 
             /// <summary>
@@ -40,11 +40,6 @@ namespace Tempest.Expressions
             public static ConstantExpression DefaultFor<T>()
             {
                 return DefaultForFactory<T>.Value;
-            }
-
-            static class NullFactory<T>
-            {
-                public static readonly ConstantExpression Value = Expression.Constant(null, typeof(T));
             }
 
             static class DefaultForFactory<T>

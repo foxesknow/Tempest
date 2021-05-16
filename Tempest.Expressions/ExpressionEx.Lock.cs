@@ -14,6 +14,20 @@ namespace Tempest.Expressions
         private static readonly MethodInfo s_MonitorEnter = GetMethod(typeof(Monitor), "Enter", BindingFlags.Public | BindingFlags.Static, typeof(object), typeof(bool).MakeByRefType());
         private static readonly MethodInfo s_MonitorExit = GetMethod(typeof(Monitor), "Exit", BindingFlags.Public | BindingFlags.Static, typeof(object));
 
+        /// <summary>
+        /// Acquires a lock and executes a body
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// lock(lockObject)
+        /// {
+        ///     body
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="lockObject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static Expression Lock(Expression lockObject, Expression body)
         {
             if(lockObject == null) throw new ArgumentNullException(nameof(lockObject)); 

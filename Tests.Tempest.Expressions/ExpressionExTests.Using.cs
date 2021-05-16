@@ -44,6 +44,28 @@ namespace Tests.Tempest.Expressions
             Assert.That(target.Disposed, Is.True);
         }
 
+        [Test]
+        public void Using_Variable()
+        {
+            var v = ExpressionEx.Variable<DisposableClass_Implicit>();
+            var vInit = Expression.Assign(v, Expression.New(v.Type));
+
+            var body = Expression.Block
+            (
+                new[]{v},
+                ExpressionEx.Using
+                (
+                    vInit,
+                    Expression.Constant("hi")
+                )
+            );
+
+            var lambda = Expression.Lambda<Func<string>>(body);
+            var function = lambda.Compile();
+
+            Assert.That(function(), Is.EqualTo("hi"));
+        }
+
 
         class DisposableClass_Implicit : IDisposable
         {

@@ -7,5 +7,11 @@ using System.Threading.Tasks;
 
 namespace Tempest.Expressions
 {
-    public delegate Expression LoopBodyBuilder(LabelTarget @break, LabelTarget @continue);
+    /// <summary>
+    /// Generates the body of a loop
+    /// </summary>
+    /// <param name="break">A label that will allow you to break out of the loop</param>
+    /// <param name="continue">A label that will allow you to continue the loop</param>
+    /// <returns></returns>
+    public delegate Expression LoopBodyBuilder(LabelTarget @break, LabelTarget @continue);    
 }

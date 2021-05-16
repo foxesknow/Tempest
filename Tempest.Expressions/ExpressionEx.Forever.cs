@@ -9,6 +9,21 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
+        /// <summary>
+        /// Creates an expresson that runs forever, or until some breaks out of the loop
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// <!<![CDATA[
+        /// while(true)
+        /// {
+        ///     body
+        /// }
+        /// ]]>
+        /// </code>
+        /// </example>
+        /// <param name="bodyBuilder"></param>
+        /// <returns></returns>
         public static Expression Forever(LoopBodyBuilder bodyBuilder)
         {
             return While(Constants.Bool.True, bodyBuilder);

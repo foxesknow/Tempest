@@ -9,6 +9,20 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
+        /// <summary>
+        /// Generates a while loop
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// while(predicate)
+        /// {
+        ///     body
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="predicate"></param>
+        /// <param name="bodyBuilder"></param>
+        /// <returns></returns>
         public static Expression While(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
             if(predicate == null) throw new ArgumentNullException(nameof(predicate));

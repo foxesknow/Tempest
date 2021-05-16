@@ -12,6 +12,20 @@ namespace Tempest.Expressions
     {
         private static readonly MethodInfo s_DisposableDispose = GetMethod(typeof(IDisposable), "Dispose", BindingFlags.Public | BindingFlags.Instance);
 
+        /// <summary>
+        /// Generates a using block
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// using(@using)
+        /// {
+        ///     // body
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="using"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static Expression Using(Expression @using, Expression body)
         {
             if(@using == null) throw new ArgumentNullException(nameof(@using)); 
