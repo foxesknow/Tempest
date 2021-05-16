@@ -54,5 +54,10 @@ namespace Tempest.Expressions
         {
             return Expression.Variable(typeof(T), name);
         }
+
+        public static UnaryExpression Convert<T>(Expression expression)
+        {
+            return Expression.Convert(expression, typeof(T));
+        }
     }
 }

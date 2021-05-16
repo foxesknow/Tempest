@@ -26,41 +26,35 @@ namespace Tempest.Expressions
         /// <param name="using"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public static Expression Using(Expression @using, Expression body)
+        public static Expression Using(Expression @using, UsingBuilder bodyBuilder)
         {
             if(@using == null) throw new ArgumentNullException(nameof(@using)); 
-            if(body == null) throw new ArgumentNullException(nameof(body)); 
+            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder)); 
 
             if(@using.Type.IsValueType)
             {
-                return UsingStruct(@using, body);
+                return UsingStruct(@using, bodyBuilder);
             }
             else
             {
-                return UsingClass(@using, body);
+                return UsingClass(@using, bodyBuilder);
             }
         }
 
-        private static Expression UsingClass(Expression @using, Expression body)
+        private static Expression UsingClass(Expression @using, UsingBuilder bodyBuilder)
         {
             if(typeof(IDisposable).IsAssignableFrom(@using.Type) == false) throw new ArgumentException("using expression is not disposable", nameof(@using));
 
-            var usingVariable = Variable<IDisposable>("using");
+            var usingVariable = Expression.Variable(@using.Type, "using");
             var usingInit = Expression.Assign(usingVariable, @using);
 
             var tryFinally = Expression.TryFinally
             (
-                Expression.Block
+                bodyBuilder(usingVariable),
+                Expression.IfThen
                 (
-                    body
-                ),
-                Expression.Block
-                (
-                    Expression.IfThen
-                    (
-                        Expression.NotEqual(usingVariable, Constants.Null<IDisposable>()),
-                        Expression.Call(usingVariable, s_DisposableDispose)
-                    )
+                    Expression.NotEqual(usingVariable, Expression.Constant(null, @using.Type)),
+                    Expression.Call(Convert<IDisposable>(usingVariable), s_DisposableDispose)
                 )
             );
 
@@ -74,7 +68,7 @@ namespace Tempest.Expressions
             return block;
         }
 
-        private static Expression UsingStruct(Expression @using, Expression body)
+        private static Expression UsingStruct(Expression @using, UsingBuilder bodyBuilder)
         {
             if(typeof(IDisposable).IsAssignableFrom(@using.Type) == false) throw new ArgumentException("using expression is not disposable", nameof(@using));
 
@@ -90,7 +84,7 @@ namespace Tempest.Expressions
                 // The Dispose() method is explicitly implemented
                 tryFinally = Expression.TryFinally
                 (
-                    body,
+                    bodyBuilder(usingVariable),
                     Expression.Call
                     (
                         Expression.Convert(usingVariable, typeof(IDisposable)),
@@ -102,7 +96,7 @@ namespace Tempest.Expressions
             {
                 tryFinally = Expression.TryFinally
                 (
-                    body,
+                    bodyBuilder(usingVariable),
                     Expression.Call(usingVariable, directDisposeMethod)
                 );
             }
