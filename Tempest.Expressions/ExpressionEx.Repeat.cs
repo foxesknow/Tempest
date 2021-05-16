@@ -31,12 +31,23 @@ namespace Tempest.Expressions
             var (@break, @continue) = MakeBreakAndContinueLabels();
             var repeat = MakeLabel("repeat");
 
-            // TODO: support none int types here
-            var counter = Variable<int>("repeatCount");
-            var counterInitializer = Expression.Assign(counter, Constants.Int.Int_0);
+            if(count.Type.IsIntegral() == false)
+            {
+                throw new ArgumentException("count is not an integral type", nameof(count));
+            }
 
-            var stop = Variable<int>("stop");
-            var stopInitializer = Expression.Assign(stop, count);
+            var counterType = count.Type.IntegralSize() switch
+            {
+                1 => typeof(int),
+                2 => typeof(int),
+                _ => count.Type
+            };
+
+            var counter = Expression.Variable(counterType, "repeatCount");
+            var counterInitializer = Expression.Assign(counter, Constants.ZeroFor(counterType));
+
+            var stop = Expression.Variable(counterType, "stop");
+            var stopInitializer = Expression.Assign(stop, ConvertIfNecessary(count, counterType));
 
             var ifBody = bodyBuilder(@break, @continue);
 

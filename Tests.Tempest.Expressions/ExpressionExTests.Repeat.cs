@@ -65,6 +65,28 @@ namespace Tests.Tempest.Expressions
         }
 
         [Test]
+        public void Repeat_Byte_counter()
+        {
+            var counter = ExpressionEx.Variable<int>("a");
+            var init = Expression.Assign(counter, Expression.Constant(0));
+
+            var repeat = ExpressionEx.Repeat(Expression.Constant((byte)5), (b, c) => Expression.PreIncrementAssign(counter));
+
+            var block = Expression.Block
+            (
+                new ParameterExpression[]{counter},
+                init,
+                repeat, 
+                counter
+            );
+            var lambda = Expression.Lambda<Func<int>>(block);
+            var func = lambda.Compile();
+            var answer = func();
+
+            Assert.That(answer, Is.EqualTo(5));
+        }
+
+        [Test]
         public void Repeat_break()
         {
             var counter = ExpressionEx.Variable<int>("a");

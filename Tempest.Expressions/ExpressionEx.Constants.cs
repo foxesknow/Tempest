@@ -22,6 +22,25 @@ namespace Tempest.Expressions
                 public static readonly Expression Int_0 = Expression.Constant(0, typeof(int));
             }
 
+            public static ConstantExpression ZeroFor(Type type)
+            {
+                if(type == null) throw new ArgumentNullException(nameof(type));
+
+                if(type == typeof(byte)) return DefaultFor<byte>();
+                if(type == typeof(sbyte)) return DefaultFor<sbyte>();
+                if(type == typeof(short)) return DefaultFor<short>();
+                if(type == typeof(ushort)) return DefaultFor<ushort>();
+                if(type == typeof(int)) return DefaultFor<int>();
+                if(type == typeof(uint)) return DefaultFor<uint>();
+                if(type == typeof(long)) return DefaultFor<long>();
+                if(type == typeof(ulong)) return DefaultFor<ulong>();
+                if(type == typeof(float)) return DefaultFor<float>();
+                if(type == typeof(double)) return DefaultFor<double>();
+                if(type == typeof(char)) return DefaultFor<char>();
+
+                throw new ArgumentException($"zero not available for {type.Name}", nameof(type));
+            }
+
             /// <summary>
             /// Returns the null value for a given reference type
             /// </summary>

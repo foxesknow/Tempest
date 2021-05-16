@@ -35,6 +35,16 @@ namespace Tempest.Expressions
             return method;
         }
 
+        private static Expression ConvertIfNecessary(Expression expression, Type type)
+        {
+            if(expression.Type == type)
+            {
+                return expression;
+            }
+
+            return Expression.Convert(expression, type);
+        }
+
         public static ParameterExpression Parameter<T>()
         {
             return Expression.Parameter(typeof(T));
