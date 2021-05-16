@@ -11,8 +11,8 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
-        private static readonly MethodInfo s_MonitorEnter = GetMethod(typeof(Monitor), "Enter", BindingFlags.Public | BindingFlags.Static, typeof(object), typeof(bool).MakeByRefType());
-        private static readonly MethodInfo s_MonitorExit = GetMethod(typeof(Monitor), "Exit", BindingFlags.Public | BindingFlags.Static, typeof(object));
+        private static readonly MethodInfo s_MonitorEnter = GetMethod(() => Monitor.Enter(null!, ref DiscardableRef<bool>.Value));
+        private static readonly MethodInfo s_MonitorExit = GetMethod(() => Monitor.Exit(null!));
 
         /// <summary>
         /// Acquires a lock and executes a body

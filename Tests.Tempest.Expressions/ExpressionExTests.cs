@@ -12,14 +12,6 @@ namespace Tests.Tempest.Expressions
     [TestFixture]
     public partial class ExpressionExTests
     {
-        [Test]
-        public void Foo()
-        {
-            DoIt(() => Console.ReadLine());
-        }
-
-        void DoIt<T>(Expression<Func<T>> function)
-        {
-        }
+       
     }
 }

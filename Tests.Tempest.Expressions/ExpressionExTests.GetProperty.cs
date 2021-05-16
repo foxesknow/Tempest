@@ -14,26 +14,21 @@ namespace Tests.Tempest.Expressions
         [TestCase]
         public void GetProperty_Static()
         {
-            Expression<Func<int>> windowHeight = () => Console.WindowHeight;
-            var property = ExpressionEx.GetProperty(windowHeight);
-
+            var property = ExpressionEx.GetProperty(() => Console.WindowHeight);
             Assert.That(property, Is.Not.Null);
         }
 
         [TestCase]
         public void GetProperty_Instance()
         {
-            Expression<Func<List<int>, int>> count = list => list.Count;
-            var property = ExpressionEx.GetProperty(count);
-
+            var property = ExpressionEx.GetProperty((List<int> list) => list.Count);
             Assert.That(property, Is.Not.Null);
         }
 
         [TestCase]
         public void GetProperty_Method()
         {
-            Expression<Func<string>> readLine= () => Console.ReadLine();
-            Assert.Catch(() => ExpressionEx.GetProperty(readLine));
+            Assert.Catch(() => ExpressionEx.GetProperty(() => Console.ReadLine()));
         }
     }
 }

@@ -73,10 +73,48 @@ namespace Tempest.Expressions
         /// <summary>
         /// Extracts the MethodInfo from a lambda representing a method call
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
         /// <param name="delegate"></param>
         /// <returns></returns>
-        public static MethodInfo GetMethod<T>(Expression<T> @delegate) where T : Delegate
+        public static MethodInfo GetMethod<TOut>(Expression<Func<TOut>> @delegate)
+        {
+            return DoGetMethod(@delegate);
+        }
+
+        /// <summary>
+        /// Extracts the MethodInfo from a lambda representing a method call
+        /// </summary>
+        /// <typeparam name="TIn"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="delegate"></param>
+        /// <returns></returns>
+        public static MethodInfo GetMethod<TIn, TOut>(Expression<Func<TIn, TOut>> @delegate)
+        {
+            return DoGetMethod(@delegate);
+        }
+
+        /// <summary>
+        /// Extracts the MethodInfo from a lambda representing a method call
+        /// </summary>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="delegate"></param>
+        /// <returns></returns>
+        public static MethodInfo GetMethod<TOut>(Expression<Action<TOut>> @delegate)
+        {
+            return DoGetMethod(@delegate);
+        }
+
+        /// <summary>
+        /// Extracts the MethodInfo from a lambda representing a method call
+        /// </summary>
+        /// <param name="delegate"></param>
+        /// <returns></returns>
+        public static MethodInfo GetMethod(Expression<Action> @delegate)
+        {
+            return DoGetMethod(@delegate);
+        }
+
+        private static MethodInfo DoGetMethod<T>(Expression<T> @delegate) where T : Delegate
         {
             if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
 
@@ -94,7 +132,24 @@ namespace Tempest.Expressions
         /// <typeparam name="T"></typeparam>
         /// <param name="delegate"></param>
         /// <returns></returns>
-        public static PropertyInfo GetProperty<T>(Expression<T> @delegate) where T : Delegate
+        public static PropertyInfo GetProperty<TOut>(Expression<Func<TOut>> @delegate)
+        {
+            return DoGetProperty(@delegate);
+        }
+
+        /// <summary>
+        /// Extracts the PropertyInfo from a lamda representing a property access
+        /// </summary>
+        /// <typeparam name="TIn"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="delegate"></param>
+        /// <returns></returns>
+        public static PropertyInfo GetProperty<TIn, TOut>(Expression<Func<TIn, TOut>> @delegate)
+        {
+            return DoGetProperty(@delegate);
+        }
+
+        private static PropertyInfo DoGetProperty<T>(Expression<T> @delegate) where T : Delegate
         {
             if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
 

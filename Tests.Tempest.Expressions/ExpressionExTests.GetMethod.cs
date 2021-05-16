@@ -14,8 +14,15 @@ namespace Tests.Tempest.Expressions
         [TestCase]
         public void GetMethod_Static_Action()
         {
-            Expression<Action> writeLine = () => Console.WriteLine((object)null);
-            var method = ExpressionEx.GetMethod(writeLine);
+            var method = ExpressionEx.GetMethod(() => Console.WriteLine((object)null));
+
+            Assert.That(method, Is.Not.Null);
+        }
+
+        [TestCase]
+        public void GetMethod_Static_Action_Input()
+        {
+            var method = ExpressionEx.GetMethod((List<int> list) => list.Clear());
 
             Assert.That(method, Is.Not.Null);
         }
@@ -23,24 +30,21 @@ namespace Tests.Tempest.Expressions
         [TestCase]
         public void GetMethod_Static_Function()
         {
-            Expression<Func<ConsoleKeyInfo>> readKey = () => Console.ReadKey(true);
-            var method = ExpressionEx.GetMethod(readKey);
+            var method = ExpressionEx.GetMethod(() => Console.ReadKey(true));
 
-            Assert.That(readKey, Is.Not.Null);
+            Assert.That(method, Is.Not.Null);
         }
 
         [TestCase]
         public void GetMethod_Property()
         {
-            Expression<Func<int>> windowHeight = () => Console.WindowHeight;
-            Assert.Catch(() => ExpressionEx.GetMethod(windowHeight));
+            Assert.Catch(() => ExpressionEx.GetMethod(() => Console.WindowHeight));
         }
 
         [TestCase]
         public void GetMethod_Instance_Action()
         {
-            Expression<Action<List<int>>> add = list => list.Add(1);
-            var method = ExpressionEx.GetMethod(add);
+            var method = ExpressionEx.GetMethod((List<int> list) => list.Add(1));
 
             Assert.That(method, Is.Not.Null);
         }
@@ -48,8 +52,7 @@ namespace Tests.Tempest.Expressions
         [TestCase]
         public void GetMethod_Instance_Function()
         {
-            Expression<Func<List<int>, int>> add = list => list.IndexOf(1);
-            var method = ExpressionEx.GetMethod(add);
+            var method = ExpressionEx.GetMethod((List<int> list) => list.IndexOf(1));
 
             Assert.That(method, Is.Not.Null);
         }

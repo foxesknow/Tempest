@@ -10,7 +10,7 @@ namespace Tempest.Expressions
 {
     public partial class ExpressionEx
     {
-        private static readonly MethodInfo s_DisposableDispose = GetMethod(typeof(IDisposable), "Dispose", BindingFlags.Public | BindingFlags.Instance);
+        private static readonly MethodInfo s_DisposableDispose = GetMethod((IDisposable d) => d.Dispose());
 
         /// <summary>
         /// Generates a using block
@@ -77,7 +77,7 @@ namespace Tempest.Expressions
 
             Expression? tryFinally = null;
 
-            var directDisposeMethod = @using.Type.GetMethod("Dispose", BindingFlags.Public | BindingFlags.Instance, null, new Type[0], null);
+            var directDisposeMethod = GetMethod(@using.Type, "Dispose", BindingFlags.Public | BindingFlags.Instance, new Type[0]);
 
             if(directDisposeMethod == null)
             {
