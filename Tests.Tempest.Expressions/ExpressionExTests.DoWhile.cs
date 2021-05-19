@@ -14,14 +14,14 @@ namespace Tests.Tempest.Expressions
     public partial class ExpressionExTests
     {
         [Test]
-        public void While()
+        public void DoWhile()
         {
             var counter = Expression.Variable(typeof(int), "a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var predicate = Expression.LessThan(counter, Expression.Constant(10));
 
-            var @while = ExpressionEx.While(predicate, (b, c) => 
+            var doWhile= ExpressionEx.DoWhile(predicate, (b, c) => 
             {
                 return Expression.Block
                 (
@@ -35,7 +35,7 @@ namespace Tests.Tempest.Expressions
             (
                 new ParameterExpression[]{counter},
                 init,
-                @while, 
+                doWhile, 
                 counter
             );
             var lambda = Expression.Lambda<Func<int>>(block);
@@ -46,14 +46,14 @@ namespace Tests.Tempest.Expressions
         }
 
         [Test]
-        public void While_DoesNotLoop()
+        public void DoWhile_LoopsOnce()
         {
             var counter = Expression.Variable(typeof(int), "a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var predicate = Expression.LessThan(counter, Expression.Constant(0));
 
-            var @while = ExpressionEx.While(predicate, (b, c) => 
+            var doWhile= ExpressionEx.DoWhile(predicate, (b, c) => 
             {
                 return Expression.Block
                 (
@@ -67,14 +67,14 @@ namespace Tests.Tempest.Expressions
             (
                 new ParameterExpression[]{counter},
                 init,
-                @while, 
+                doWhile, 
                 counter
             );
             var lambda = Expression.Lambda<Func<int>>(block);
             var func = lambda.Compile();
             var answer = func();
 
-            Assert.That(answer, Is.EqualTo(0));
+            Assert.That(answer, Is.EqualTo(3));
         }
     }
 }

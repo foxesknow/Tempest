@@ -53,7 +53,7 @@ namespace Tempest.Expressions
                 bodyBuilder(usingVariable),
                 Expression.IfThen
                 (
-                    Expression.NotEqual(usingVariable, Expression.Constant(null, @using.Type)),
+                    Expression.ReferenceNotEqual(usingVariable, Constants.Null(@using.Type)),
                     Expression.Call(Convert<IDisposable>(usingVariable), s_DisposableDispose)
                 )
             );

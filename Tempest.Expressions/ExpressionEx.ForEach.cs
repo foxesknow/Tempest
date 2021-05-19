@@ -16,7 +16,7 @@ namespace Tempest.Expressions
         /// </summary>
         /// <example>
         /// <code>
-        /// foreach(som-var in sequence)
+        /// foreach(some-var in sequence)
         /// {
         ///     body
         /// }

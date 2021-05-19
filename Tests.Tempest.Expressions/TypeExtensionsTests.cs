@@ -116,5 +116,16 @@ namespace Tests.Tempest.Expressions
         {
             Assert.Catch(() => type.IntegralSize());
         }
+
+        [TestCase(typeof(object), ExpectedResult = true)]
+        [TestCase(typeof(string), ExpectedResult = true)]
+        [TestCase(typeof(List<int>), ExpectedResult = true)]
+        [TestCase(typeof(List<string>), ExpectedResult = true)]
+        [TestCase(typeof(Nullable<int>), ExpectedResult = true)]
+        [TestCase(typeof(int), ExpectedResult = false)]
+        public bool IsNullable(Type type)
+        {
+            return type.IsNullable();
+        }
     }
 }

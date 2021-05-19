@@ -12,6 +12,5 @@ namespace Tests.Tempest.Expressions
     [TestFixture]
     public partial class ExpressionExTests
     {
-       
     }
 }

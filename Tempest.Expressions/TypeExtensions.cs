@@ -98,11 +98,21 @@ namespace Tempest.Expressions
             throw new ArgumentException("not an integral type", nameof(type));
         }
 
+        /// <summary>
+        /// Returns true if a type is a signed integral type (sbyte, short, int, long)
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsSigned(this Type type)
         {
             return IsUnsigned(type) == false;
         }
 
+        /// <summary>
+        /// Returns the number of bytes used by an integeral type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static int IntegralSize(this Type type)
         {   
             if(type == null) throw new ArgumentNullException(nameof(type));
@@ -125,6 +135,23 @@ namespace Tempest.Expressions
             }
 
             throw new ArgumentException("not an integral type", nameof(type));
+        }
+
+        /// <summary>
+        /// Returns true is a type if nullable (a reference type or a nullable value type)
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsNullable(this Type type)
+        {
+            if(type == null) throw new ArgumentNullException(nameof(type));
+
+            if(type.IsValueType)
+            {
+                return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+            }
+
+            return true;
         }
     }
 }

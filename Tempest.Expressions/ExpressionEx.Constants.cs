@@ -11,6 +11,8 @@ namespace Tempest.Expressions
     {
         public static class Constants
         {
+            public static readonly Expression Void = Expression.Default(typeof(void));
+
             public static class Bool
             {
                 public static readonly Expression True = Expression.Constant(true, typeof(bool));
@@ -49,6 +51,19 @@ namespace Tempest.Expressions
             public static ConstantExpression Null<T>() where T : class
             {
                 return DefaultForFactory<T>.Value;
+            }
+
+            /// <summary>
+            /// Returns the null value for a given reference type
+            /// </summary>
+            /// <param name="type"></param>
+            /// <returns></returns>
+            public static ConstantExpression Null(Type type)
+            {
+                if(type == null) throw new ArgumentNullException(nameof(type));
+                if(type.IsValueType) throw new ArgumentException("type is a value type", nameof(type));
+
+                return Expression.Constant(null, type);
             }
 
             /// <summary>
