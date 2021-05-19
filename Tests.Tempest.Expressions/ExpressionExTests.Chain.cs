@@ -14,7 +14,7 @@ namespace Tests.Tempest.Expressions
     public partial class ExpressionExTests
     {
         [Test]
-        public void Chain_1()
+        public void Chain_Conditionals()
         {
             var p1 = ExpressionEx.Parameter<User>();
             var getName = ExpressionEx.GetProperty((User user) => user.Name);
@@ -49,7 +49,7 @@ namespace Tests.Tempest.Expressions
         }
 
         [Test]
-        public void Chain_2()
+        public void Chain_ToVoid()
         {
             var p1 = ExpressionEx.Parameter<List<int>>();
             var getRange = ExpressionEx.GetMethod((List<int> list) => list.GetRange(0, 1));
@@ -79,7 +79,7 @@ namespace Tests.Tempest.Expressions
 
         
         [Test]
-        public void Chain_3()
+        public void Chain_CallThenProperty()
         {
             var ctor = ExpressionEx.GetConstructor(() => new List<int>());
             var getRange = ExpressionEx.GetMethod((List<int> list) => list.GetRange(0, 1));
