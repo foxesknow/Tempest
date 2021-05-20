@@ -11,7 +11,8 @@ namespace Tempest.Expressions
     public static partial class ExpressionEx
     {
         /// <summary>
-        /// Extracts the PropertyInfo from a lamda representing a property access
+        /// Extracts the PropertyInfo from a lamda representing a property access.
+        /// This method is for getting static properties
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="delegate"></param>
@@ -22,7 +23,8 @@ namespace Tempest.Expressions
         }
 
         /// <summary>
-        /// Extracts the PropertyInfo from a lamda representing a property access
+        /// Extracts the PropertyInfo from a lamda representing a property access.
+        /// This method is for getting instance properties
         /// </summary>
         /// <typeparam name="TIn"></typeparam>
         /// <typeparam name="TOut"></typeparam>

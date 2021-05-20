@@ -42,15 +42,15 @@ namespace Tempest.Expressions
             if(instance == null) throw new ArgumentNullException(nameof(instance));
             if(links == null) throw new ArgumentNullException(nameof(links));
 
-            var functions = links as ICollection<Func<Expression, Expression>> ?? links.ToList();
+            var functions = links as IList<Func<Expression, Expression>> ?? links.ToList();
             if(functions.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(links));
 
-            var expression = functions.Aggregate
-            (
-                instance,
-                (seed, acc) => acc(seed)
-            );
-
+            var expression = instance;
+            for(int i = 0; i < functions.Count; i++)
+            {
+                var function = functions[i];
+                expression = function(expression);
+            }
 
             return expression;
         }

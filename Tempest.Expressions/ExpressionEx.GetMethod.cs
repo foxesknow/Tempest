@@ -11,7 +11,8 @@ namespace Tempest.Expressions
     public static partial class ExpressionEx
     {
         /// <summary>
-        /// Extracts the MethodInfo from a lambda representing a method call
+        /// Extracts the MethodInfo from a lambda representing a method call.
+        /// This method is for getting static methods that return a value
         /// </summary>
         /// <typeparam name="TOut"></typeparam>
         /// <param name="delegate"></param>
@@ -22,7 +23,8 @@ namespace Tempest.Expressions
         }
 
         /// <summary>
-        /// Extracts the MethodInfo from a lambda representing a method call
+        /// Extracts the MethodInfo from a lambda representing a method call.
+        /// This method is for getting instance methods that return a value
         /// </summary>
         /// <typeparam name="TIn"></typeparam>
         /// <typeparam name="TOut"></typeparam>
@@ -34,18 +36,20 @@ namespace Tempest.Expressions
         }
 
         /// <summary>
-        /// Extracts the MethodInfo from a lambda representing a method call
+        /// Extracts the MethodInfo from a lambda representing a method call.
+        /// This method is for getting instance methods that return void.
         /// </summary>
-        /// <typeparam name="TOut"></typeparam>
+        /// <typeparam name="TIn"></typeparam>
         /// <param name="delegate"></param>
         /// <returns></returns>
-        public static MethodInfo GetMethod<TOut>(Expression<Action<TOut>> @delegate)
+        public static MethodInfo GetMethod<TIn>(Expression<Action<TIn>> @delegate)
         {
             return DoGetMethod(@delegate);
         }
 
         /// <summary>
-        /// Extracts the MethodInfo from a lambda representing a method call
+        /// Extracts the MethodInfo from a lambda representing a method call.
+        /// This method is for getting static methods that return void
         /// </summary>
         /// <param name="delegate"></param>
         /// <returns></returns>

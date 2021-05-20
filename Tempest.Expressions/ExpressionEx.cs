@@ -53,6 +53,22 @@ namespace Tempest.Expressions
             return Expression.Convert(expression, type);
         }
 
+        private static Type GetTupleDefinition(int arity)
+        {
+            return arity switch
+            {
+                1 => typeof(ValueTuple<>),
+                2 => typeof(ValueTuple<,>),
+                3 => typeof(ValueTuple<,,>),
+                4 => typeof(ValueTuple<,,,>),
+                5 => typeof(ValueTuple<,,,,>),
+                6 => typeof(ValueTuple<,,,,,>),
+                7 => typeof(ValueTuple<,,,,,,>),
+                8 => typeof(ValueTuple<,,,,,,,>),
+                _ => throw new ArgumentException($"invalid arity : {arity}", nameof(arity))
+            };
+        }
+
         public static ParameterExpression Parameter<T>()
         {
             return Expression.Parameter(typeof(T));
