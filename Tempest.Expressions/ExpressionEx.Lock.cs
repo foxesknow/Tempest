@@ -35,40 +35,28 @@ namespace Tempest.Expressions
 
             if(lockObject.Type.IsValueType) throw new ArgumentException("cannot lock on a value type", nameof(lockObject));
 
-            var lockVariable = Variable<object>("lock");
-            var lockInit = lockObject.Type.IsValueType switch
+            var block = Let(Variable<object>("lock"), lockObject, @lock =>
             {
-                true => Expression.Assign(lockVariable, Expression.Convert(lockObject, typeof(object))),
-                _    => Expression.Assign(lockVariable, lockObject)
-            };
-
-            var lockTakenVariable = Variable<bool>("lockTaken");
-            var lockTakenInit = Expression.Assign(lockTakenVariable, Constants.Bool.False);
-
-            var tryFinally = Expression.TryFinally
-            (
-                Expression.Block
-                (
-                    Expression.Call(s_MonitorEnter, lockVariable, lockTakenVariable),
-                    body
-                ),
-                Expression.Block
-                (
-                    Expression.IfThen
+                return Let(Variable<bool>("lockTaken"), Constants.Bool.False, lockTaken =>
+                {
+                    return Expression.TryFinally
                     (
-                        lockTakenVariable,
-                        Expression.Call(s_MonitorExit, lockVariable)
-                    )
-                )
-            );
-
-            var block = Expression.Block
-            (
-                new []{lockVariable, lockTakenVariable},
-                lockInit,
-                lockTakenInit,
-                tryFinally
-            );
+                        Expression.Block
+                        (
+                            Expression.Call(s_MonitorEnter, @lock, lockTaken),
+                            body
+                        ),
+                        Expression.Block
+                        (
+                            Expression.IfThen
+                            (
+                                lockTaken,
+                                Expression.Call(s_MonitorExit, @lock)
+                            )
+                        )
+                    );
+                });
+            });
 
             return block;
         }
