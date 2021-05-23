@@ -10,7 +10,7 @@ namespace Tempest.Expressions
 {
     public static class TypeExtensions
     {
-        public  static MethodInfo GetMethod(this Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
+        public static MethodInfo GetMethod(this Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
         {
             if(type == null) throw new ArgumentNullException(nameof(type));
 

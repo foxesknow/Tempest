@@ -44,7 +44,7 @@ namespace Tempest.Expressions
                 return property;
             }
 
-            throw new ArgumentException("not a property call", nameof(@delegate));
+            throw new ArgumentException("not a property", nameof(@delegate));
         }
     }
 }

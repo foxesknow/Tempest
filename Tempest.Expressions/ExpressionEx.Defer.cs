@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Tempest.Expressions
 {
-    public static partial class ExpressionExDefer
+    public static partial class ExpressionEx
     {
         /// <summary>
         /// Defers running an expression until after the body has been evaluates.
