@@ -20,6 +20,14 @@ namespace Tempest.Expressions
             return method;
         }
 
+        public static MethodInfo? TryGetMethod(this Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
+        {
+            if(type == null) throw new ArgumentNullException(nameof(type));
+
+            var method = type.GetMethod(name, bindingFlags, null, parameters, null);
+            return method;
+        }
+
         public static bool TryGetGenericImplementation(this Type type, Type genericType, [NotNullWhen(true)] out Type? implementation)
         {
             if(type == null) throw new ArgumentNullException(nameof(type));

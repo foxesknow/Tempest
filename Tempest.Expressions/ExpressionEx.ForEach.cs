@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tempest.Expressions
 {
@@ -30,6 +31,72 @@ namespace Tempest.Expressions
             if(sequence == null) throw new ArgumentNullException(nameof(sequence));
             if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
 
+            if(TryForEachFromPattern(sequence, bodyBuilder, out var forEach))
+            {
+                return forEach;
+            }
+
+            return ForEachFromIEnumerable(sequence, bodyBuilder);
+        }
+
+        public static bool TryForEachFromPattern(Expression sequence, LetLoopBodyBuilder bodyBuilder, [NotNullWhen(true)] out Expression? forEach)
+        {
+            /*
+             * C# applies a pattern matching approach to foreach.
+             * If a type has a GetEnumerator method that returns a type that has the shape:
+             * 
+             *     bool MoveNext();
+             *     T Current{get;}
+             *     
+             * then it will use this method, rather than querying for the IEnumerable interfaces and using those.
+             * The type of Current will decide the type
+             */
+
+            forEach = null;
+
+            var flags = BindingFlags.Public | BindingFlags.Instance;
+
+            var getEnumerator = sequence.Type.TryGetMethod("GetEnumerator", flags, Type.EmptyTypes);
+            if(getEnumerator == null) return false;
+
+            var enumeratorType = getEnumerator.ReturnType;
+            if(enumeratorType == null || enumeratorType == typeof(void)) return false;
+
+            var current = enumeratorType.GetProperty("Current", flags);
+            if(current == null) return false;
+
+            var itemType = current.PropertyType;
+
+            var moveNext = enumeratorType.GetMethod("MoveNext", flags, Type.EmptyTypes);
+            if(moveNext == null || moveNext.ReturnType != typeof(bool)) return false;
+
+            var block = Let(Expression.Variable(enumeratorType, "enumerator"), Expression.Call(sequence, getEnumerator), enumerator =>
+            {
+                if(typeof(IDisposable).IsAssignableFrom(enumeratorType))
+                {
+                    return Using(enumerator, b =>
+                    {
+                        return While(Expression.Call(enumerator, moveNext), (@break, @continue) =>
+                        {
+                            return Let(Expression.Parameter(itemType), Expression.Property(enumerator, current), let => bodyBuilder(let, @break, @continue));
+                        });
+                    });
+                }
+                else
+                {
+                    return While(Expression.Call(enumerator, moveNext), (@break, @continue) =>
+                    {
+                        return Let(Expression.Parameter(itemType), Expression.Property(enumerator, current), let => bodyBuilder(let, @break, @continue));
+                    });
+                }
+            });
+
+            forEach = block;
+            return true;
+        }
+
+        private static Expression ForEachFromIEnumerable(Expression sequence, LetLoopBodyBuilder bodyBuilder)
+        {
             if(sequence.Type.TryGetGenericImplementation(typeof(IEnumerable<>), out var enumerableType) == false)
             {
                 throw new ArgumentException("sequence is not enumerable", nameof(sequence));

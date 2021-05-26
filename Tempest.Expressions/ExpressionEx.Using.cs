@@ -77,7 +77,7 @@ namespace Tempest.Expressions
 
             Expression? tryFinally = null;
 
-            var directDisposeMethod = GetMethod(@using.Type, "Dispose", BindingFlags.Public | BindingFlags.Instance, new Type[0]);
+            var directDisposeMethod = @using.Type.TryGetMethod("Dispose", BindingFlags.Public | BindingFlags.Instance, Type.EmptyTypes);
 
             if(directDisposeMethod == null)
             {

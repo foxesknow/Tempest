@@ -35,14 +35,6 @@ namespace Tempest.Expressions
             return $"{name}-{id}";
         }
 
-        private static MethodInfo GetMethod(Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
-        {
-            var method = type.GetMethod(name, bindingFlags, null, parameters, null);
-            if(method == null) throw new ArgumentException($"could not find method {name}");
-
-            return method;
-        }
-
         private static Expression ConvertIfNecessary(Expression expression, Type type)
         {
             if(expression.Type == type)

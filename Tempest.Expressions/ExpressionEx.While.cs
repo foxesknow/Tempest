@@ -26,8 +26,6 @@ namespace Tempest.Expressions
         public static Expression While(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
             if(predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if(predicate.Type != typeof(bool)) throw new ArgumentException("predicate is not a boolean", nameof(predicate));
-
             if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
 
             var (@break, @continue) = MakeBreakAndContinueLabels();

@@ -19,19 +19,19 @@ namespace Tempest.Expressions
         /// </example>
         /// <param name="name"></param>
         /// <param name="expression"></param>
-        /// <param name="letBuilder"></param>
+        /// <param name="in"></param>
         /// <returns></returns>
-        public static Expression Let(ParameterExpression name, Expression expression, LetBuilder bodyBuilder)
+        public static Expression Let(ParameterExpression name, Expression expression, LetBuilder @in)
         {
             if(name == null) throw new ArgumentNullException(nameof(name));
             if(expression == null) throw new ArgumentNullException(nameof(expression));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            if(@in == null) throw new ArgumentNullException(nameof(@in));
 
             var block = Expression.Block
             (
                 new[]{name},
                 Expression.Assign(name, expression),
-                bodyBuilder(name)
+                @in(name)
             );
 
             return block;

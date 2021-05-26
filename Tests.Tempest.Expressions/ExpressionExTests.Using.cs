@@ -62,6 +62,37 @@ namespace Tests.Tempest.Expressions
             Assert.That(function(), Is.EqualTo("hi"));
         }
 
+        [Test]
+        public void Using_Struct_Implicit()
+        {
+            var p = ExpressionEx.Parameter<DisposableStruct_Implicit>();
+            var body = ExpressionEx.Using(p, _ => Expression.Constant("hello"));
+            var lambda = Expression.Lambda<Action<DisposableStruct_Implicit>>(body, p);
+            var action = lambda.Compile();
+
+            var disposed = false;
+            var target = new DisposableStruct_Implicit(() => disposed = true);
+            Assert.That(disposed, Is.False);
+
+            action(target);
+            Assert.That(disposed, Is.True);
+        }
+
+        [Test]
+        public void Using_Struct_Explicit()
+        {
+            var p = ExpressionEx.Parameter<DisposableStruct_Explicit>();
+            var body = ExpressionEx.Using(p, _ => Expression.Constant("hello"));
+            var lambda = Expression.Lambda<Action<DisposableStruct_Explicit>>(body, p);
+            var action = lambda.Compile();
+
+            var disposed = false;
+            var target = new DisposableStruct_Explicit(() => disposed = true);
+            Assert.That(disposed, Is.False);
+
+            action(target);
+            Assert.That(disposed, Is.True);
+        }
 
         class DisposableClass_Implicit : IDisposable
         {
@@ -80,6 +111,36 @@ namespace Tests.Tempest.Expressions
             void IDisposable.Dispose()
             {
                 this.Disposed = true;
+            }
+        }
+
+        struct DisposableStruct_Implicit : IDisposable
+        {
+            private readonly Action m_DisposeAction;
+
+            public DisposableStruct_Implicit(Action disposeAction)
+            {
+                m_DisposeAction = disposeAction;
+            }
+
+            public void Dispose()
+            {
+                m_DisposeAction();
+            }
+        }
+
+        struct DisposableStruct_Explicit : IDisposable
+        {
+            private readonly Action m_DisposeAction;
+
+            public DisposableStruct_Explicit(Action disposeAction)
+            {
+                m_DisposeAction = disposeAction;
+            }
+
+            void IDisposable.Dispose()
+            {
+                m_DisposeAction();
             }
         }
     }

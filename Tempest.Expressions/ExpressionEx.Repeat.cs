@@ -27,8 +27,7 @@ namespace Tempest.Expressions
         {
             if(count == null) throw new ArgumentNullException(nameof(count));
             if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
-
-            var (@break, @continue) = MakeBreakAndContinueLabels();
+            
             var repeat = MakeLabel("repeat");
 
             if(count.Type.IsIntegral() == false)
@@ -49,6 +48,7 @@ namespace Tempest.Expressions
             var stop = Expression.Variable(counterType, "stop");
             var stopInitializer = Expression.Assign(stop, ConvertIfNecessary(count, counterType));
 
+            var (@break, @continue) = MakeBreakAndContinueLabels();
             var ifBody = bodyBuilder(@break, @continue);
 
             var condition = Expression.LessThan(counter, stop);
