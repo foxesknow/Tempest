@@ -32,5 +32,12 @@ namespace Tests.Tempest.Expressions
                 return function();
             }
         }
+
+        [Test]
+        public void OrElse_Not_Enough_Conditions()
+        {
+            Assert.Catch(() => ExpressionEx.OrElse(Expression.Constant(true)));
+            Assert.Catch(() => ExpressionEx.OrElse());
+        }
     }
 }

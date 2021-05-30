@@ -31,5 +31,20 @@ namespace Tests.Tempest.Expressions
 
             Assert.That(function(), Is.EqualTo(30));
         }
+
+        [Test]
+        public void Let_To_The_Power_4()
+        {
+            var p = ExpressionEx.Parameter<int>();
+
+            var lambda = Expression.Lambda<Func<int, int>>
+            (
+                ExpressionEx.Let(ExpressionEx.Parameter<int>(), Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
+                p
+            );
+
+            var function = lambda.Compile();
+            Assert.That(function(10), Is.EqualTo(10 * 10 * 10 * 10));
+        }
     }
 }
