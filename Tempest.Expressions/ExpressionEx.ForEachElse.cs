@@ -23,7 +23,7 @@ namespace Tempest.Expressions
         /// }
         /// else
         /// {
-        ///     // Executed unless the body was exitted via break
+        ///     // Executed unless the body was exited via break
         /// }
         /// </code>
         /// </example>
