@@ -59,7 +59,7 @@ namespace Tempest.Expressions
             var funcs = functions as ICollection<Func<Expression, Expression>> ?? functions.ToList();
             if(funcs.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(functions));
 
-            return Let(Expression.Parameter(instance.Type), instance, target =>
+            return Let(instance, target =>
             {
                 var list = funcs.Select(f => f(target)).ToList();
                 list.Add(target);
