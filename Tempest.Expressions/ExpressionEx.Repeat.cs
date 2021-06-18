@@ -65,7 +65,7 @@ namespace Tempest.Expressions
                 body,
                 Expression.Label(@continue),
                 increaseCounter,
-                Expression.Continue(repeat),
+                Expression.Goto(repeat),
                 Expression.Label(@break)
             );
         }

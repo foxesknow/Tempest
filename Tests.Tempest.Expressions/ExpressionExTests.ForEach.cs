@@ -1,14 +1,14 @@
-﻿    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
 
-    using Tempest.Expressions;
+using Tempest.Expressions;
 
-    using NUnit.Framework;
-    using System.Collections;
+using NUnit.Framework;
+using System.Collections;
 
 namespace Tests.Tempest.Expressions
 {

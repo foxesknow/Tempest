@@ -36,5 +36,21 @@ namespace Tempest.Expressions
 
             return block;
         }
+
+         /// <summary>
+        /// Generates a let binding ala F#
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// let name = expression in body
+        /// </code>
+        /// </example>
+        /// <param name="expression"></param>
+        /// <param name="in"></param>
+        /// <returns></returns>
+        public static Expression Let(Expression expression, LetBuilder @in)
+        {
+            return Let(Expression.Parameter(expression.Type), expression, @in)
+        }
     }
 }

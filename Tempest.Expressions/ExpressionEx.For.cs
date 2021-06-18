@@ -13,7 +13,7 @@ namespace Tempest.Expressions
     {
         /// <summary>
         /// Generates a for loop.
-        /// Note, iteration if explicity left to the caller
+        /// Note, iteration is explicity left to the caller
         /// </summary>
         /// <param name="predicate"></param>
         /// <param name="iteration"></param>
@@ -37,7 +37,7 @@ namespace Tempest.Expressions
                 ifBody,
                 Expression.Label(@continue),
                 iteration,
-                Expression.Continue(repeat),
+                Expression.Goto(repeat),
                 Expression.Label(@break)
             );
         }
