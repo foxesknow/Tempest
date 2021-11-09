@@ -42,7 +42,7 @@ namespace Tempest.Expressions
             if(instance == null) throw new ArgumentNullException(nameof(instance));
             if(links == null) throw new ArgumentNullException(nameof(links));
 
-            var functions = links as IList<Func<Expression, Expression>> ?? links.ToList();
+            var functions = links.ToReadOnlyList();
             if(functions.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(links));
 
             var expression = instance;

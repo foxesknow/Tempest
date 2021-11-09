@@ -75,7 +75,7 @@ namespace Tempest.Expressions
             if(conditions == null) throw new ArgumentNullException(nameof(conditions));
             if(@default == null) throw new ArgumentNullException(nameof(@default));
 
-            var conds = conditions as IList<(Expression Test, Expression Body)> ?? conditions.ToList();
+            var conds = conditions.ToReadOnlyList();
             if(conds.Count == 0) throw new ArgumentException("no conditions", nameof(conditions));
 
             var tail = @default;

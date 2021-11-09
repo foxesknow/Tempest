@@ -28,7 +28,7 @@ namespace Tempest.Expressions
         {
             if(values == null) throw new ArgumentNullException(nameof(values));
 
-            var tupleValues = values as IList<Expression> ?? values.ToList();
+            var tupleValues = values.ToReadOnlyList();
             if(tupleValues.Count == 0) throw new ArgumentException("need at least one value", nameof(values));
 
             var stack = new Stack<List<Expression>>();

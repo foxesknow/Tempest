@@ -56,7 +56,7 @@ namespace Tempest.Expressions
             if(instance == null) throw new ArgumentNullException(nameof(instance));
             if(functions == null) throw new ArgumentNullException(nameof(functions));
 
-            var funcs = functions as ICollection<Func<Expression, Expression>> ?? functions.ToList();
+            var funcs = functions.ToReadOnlyList();
             if(funcs.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(functions));
 
             return Let(instance, target =>
