@@ -80,10 +80,10 @@ namespace Tempest.Expressions
 
             var tail = @default;
 
-            for(int i = conds.Count -1 ; i >= 0; i--)
+            for(int i = conds.Count - 1 ; i >= 0; i--)
             {
-                var ifTrue = conds[i];
-                tail = Expression.IfThenElse(ifTrue.Test, ifTrue.Body, tail);
+                var (test, body) = conds[i];
+                tail = Expression.IfThenElse(test, body, tail);
             }
 
             return tail;
