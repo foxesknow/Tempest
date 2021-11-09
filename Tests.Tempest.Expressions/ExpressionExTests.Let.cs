@@ -18,9 +18,9 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Let_Add()
         {
-            var add = Let(Variable<int>("a"), Expression.Constant(10), a =>
+            var add = Let(Expression.Constant(10), a =>
             {
-                return Let(Variable<int>("b"), Expression.Constant(20), b =>
+                return Let(Expression.Constant(20), b =>
                 {
                     return Expression.Add(a, b);
                 });
@@ -39,7 +39,7 @@ namespace Tests.Tempest.Expressions
 
             var lambda = Expression.Lambda<Func<int, int>>
             (
-                ExpressionEx.Let(ExpressionEx.Parameter<int>(), Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
+                ExpressionEx.Let(Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
                 p
             );
 

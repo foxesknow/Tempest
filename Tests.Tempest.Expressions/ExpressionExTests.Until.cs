@@ -24,9 +24,9 @@ namespace Tests.Tempest.Expressions
              *    ++count;
              * }
              */
-            var body = ExpressionEx.Let(ExpressionEx.Parameter<int>("i"), ExpressionEx.Constants.Int.Int_0, i =>
+            var body = ExpressionEx.Let(ExpressionEx.Constants.Int.Int_0, i =>
             {
-                return ExpressionEx.Let(ExpressionEx.Parameter<int>("count"), ExpressionEx.Constants.Int.Int_0, count =>
+                return ExpressionEx.Let(ExpressionEx.Constants.Int.Int_0, count =>
                 {
                     return Expression.Block
                     (

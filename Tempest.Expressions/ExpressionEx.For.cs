@@ -47,7 +47,7 @@ namespace Tempest.Expressions
                 ifBody,
                 Expression.Label(@continue),
                 iteration,
-                Expression.Continue(repeat),
+                Expression.Goto(repeat),
                 Expression.Label(@break)
             );
         }

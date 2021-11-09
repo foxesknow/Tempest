@@ -30,7 +30,7 @@ namespace Tests.Tempest.Expressions
              */
             var p = ExpressionEx.Parameter<int>();
 
-            var body = ExpressionEx.Let(ExpressionEx.Parameter<int>(), Expression.Constant(0), i =>
+            var body = ExpressionEx.Let(Expression.Constant(0), i =>
             {
                 return ExpressionEx.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
                 {
@@ -69,7 +69,7 @@ namespace Tests.Tempest.Expressions
              */
             var p = ExpressionEx.Parameter<int>();
 
-            var body = ExpressionEx.Let(ExpressionEx.Parameter<int>(), Expression.Constant(0), i =>
+            var body = ExpressionEx.Let(Expression.Constant(0), i =>
             {
                 return ExpressionEx.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
                 {
@@ -113,7 +113,7 @@ namespace Tests.Tempest.Expressions
              */
             var p = ExpressionEx.Parameter<int>();
 
-            var body = ExpressionEx.Let(ExpressionEx.Parameter<int>(), Expression.Constant(0), i =>
+            var body = ExpressionEx.Let(Expression.Constant(0), i =>
             {
                 return ExpressionEx.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
                 {

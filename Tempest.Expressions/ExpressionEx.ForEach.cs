@@ -31,15 +31,17 @@ namespace Tempest.Expressions
             if(sequence == null) throw new ArgumentNullException(nameof(sequence));
             if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
 
-            if(TryForEachFromPattern(sequence, bodyBuilder, out var forEach))
+            var whileBuilder = MakeWhileBuilder(null);
+
+            if(TryForEachFromPattern(sequence, bodyBuilder, whileBuilder, out var forEach))
             {
                 return forEach;
             }
 
-            return ForEachFromIEnumerable(sequence, bodyBuilder);
+            return ForEachFromIEnumerable(sequence, bodyBuilder, whileBuilder);
         }
 
-        public static bool TryForEachFromPattern(Expression sequence, LetLoopBodyBuilder bodyBuilder, [NotNullWhen(true)] out Expression? forEach)
+        private static bool TryForEachFromPattern(Expression sequence, LetLoopBodyBuilder bodyBuilder, WhileBuilder whileBuilder, [NotNullWhen(true)] out Expression? forEach)
         {
             /*
              * C# applies a pattern matching approach to foreach.
@@ -76,7 +78,7 @@ namespace Tempest.Expressions
                 {
                     return Using(enumerator, b =>
                     {
-                        return While(Expression.Call(enumerator, moveNext), (@break, @continue) =>
+                        return whileBuilder(Expression.Call(enumerator, moveNext), (@break, @continue) =>
                         {
                             return Let(Expression.Parameter(itemType), Expression.Property(enumerator, current), let => bodyBuilder(let, @break, @continue));
                         });
@@ -84,7 +86,7 @@ namespace Tempest.Expressions
                 }
                 else
                 {
-                    return While(Expression.Call(enumerator, moveNext), (@break, @continue) =>
+                    return whileBuilder(Expression.Call(enumerator, moveNext), (@break, @continue) =>
                     {
                         return Let(Expression.Parameter(itemType), Expression.Property(enumerator, current), let => bodyBuilder(let, @break, @continue));
                     });
@@ -95,7 +97,7 @@ namespace Tempest.Expressions
             return true;
         }
 
-        private static Expression ForEachFromIEnumerable(Expression sequence, LetLoopBodyBuilder bodyBuilder)
+        private static Expression ForEachFromIEnumerable(Expression sequence, LetLoopBodyBuilder bodyBuilder, WhileBuilder whileBuilder)
         {
             if(sequence.Type.TryGetGenericImplementation(typeof(IEnumerable<>), out var enumerableType) == false)
             {
@@ -113,7 +115,7 @@ namespace Tempest.Expressions
             {
                 return Using(Expression.Call(enumerable, getEnumerator), enumerator =>
                 {
-                    return While(Expression.Call(enumerator, moveNext), (@break, @continue) =>
+                    return whileBuilder(Expression.Call(enumerator, moveNext), (@break, @continue) =>
                     {
                         return Let(Expression.Parameter(itemType), Expression.Property(enumerator, current), let => bodyBuilder(let, @break, @continue));
                     });
