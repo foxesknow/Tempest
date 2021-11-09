@@ -13,7 +13,6 @@ namespace Tempest.Expressions
     {
         /// <summary>
         /// Generates a for loop.
-        /// Note, iteration if explicity left to the caller
         /// </summary>
         /// <param name="predicate"></param>
         /// <param name="iteration"></param>
@@ -24,6 +23,17 @@ namespace Tempest.Expressions
             if(predicate == null) throw new ArgumentNullException(nameof(predicate));
             if(iteration == null) throw new ArgumentNullException(nameof(iteration));
             if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+
+            /*
+             * The loop has the form:
+             * 
+             *   for(; predicate; iteration)
+             *   {
+             *     body
+             *   }
+             *   
+             * It is the job of the caller to initialize any variables used in the first part of the for() statement
+             */
 
             var repeat = MakeLabel("repeat");
             var (@break, @continue) = MakeBreakAndContinueLabels();
