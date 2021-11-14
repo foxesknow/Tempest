@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30709.132
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempest.Expressions", "Tempest.Expressions\Tempest.Expressions.csproj", "{F52874CF-5FC7-4E9E-B299-3ED26AD51802}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Tempest.Expressions", "Tests.Tempest.Expressions\Tests.Tempest.Expressions.csproj", "{E174F4BD-9684-46CE-B6B8-3E89BF3B549A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tempest.TaskTypes", "Tempest.TaskTypes\Tempest.TaskTypes.csproj", "{D1127FCE-1595-4AC9-AB7F-1466D1BE55A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempest.TaskTypes", "Tempest.TaskTypes\Tempest.TaskTypes.csproj", "{D1127FCE-1595-4AC9-AB7F-1466D1BE55A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Tempest.TaskTypes", "Tests.Tempest.TaskTypes\Tests.Tempest.TaskTypes.csproj", "{B67B404D-D6E8-4C6A-B228-D61131E3EB4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Tempest.TaskTypes", "Tests.Tempest.TaskTypes\Tests.Tempest.TaskTypes.csproj", "{B67B404D-D6E8-4C6A-B228-D61131E3EB4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tempest.Parsing", "Tempest.Parsing\Tempest.Parsing.csproj", "{D43A159C-2285-4A7A-ACD0-A8AE42485C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Tempest.Parsing", "Tests.Tempest.Parsing\Tests.Tempest.Parsing.csproj", "{CB9F1F61-67F1-4191-8014-24D147C2B0AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{B67B404D-D6E8-4C6A-B228-D61131E3EB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B67B404D-D6E8-4C6A-B228-D61131E3EB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B67B404D-D6E8-4C6A-B228-D61131E3EB4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D43A159C-2285-4A7A-ACD0-A8AE42485C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D43A159C-2285-4A7A-ACD0-A8AE42485C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D43A159C-2285-4A7A-ACD0-A8AE42485C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D43A159C-2285-4A7A-ACD0-A8AE42485C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB9F1F61-67F1-4191-8014-24D147C2B0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB9F1F61-67F1-4191-8014-24D147C2B0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB9F1F61-67F1-4191-8014-24D147C2B0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB9F1F61-67F1-4191-8014-24D147C2B0AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
