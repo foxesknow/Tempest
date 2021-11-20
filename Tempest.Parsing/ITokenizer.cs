@@ -18,9 +18,9 @@ namespace Tempest.Parsing
 		/// </summary>
 		/// <param name="id">The token to accept</param>
 		/// <returns>true if the token could be accepted, otherwise false</returns>
-		bool TryAccept(int id);
+		bool TryAccept(TokenID id);
 
-		bool TryAccept(int id, out Token token);
+		bool TryAccept(TokenID id, out Token token);
 
 		/// <summary>
 		/// Attempts to accep one of a series of token ids
@@ -28,7 +28,7 @@ namespace Tempest.Parsing
 		/// <param name="token">On success the token that was accepted</param>
 		/// <param name="ids">A list of ids to try</param>
 		/// <returns>true if a token was accepted, otherwise false</returns>
-		bool TryAcceptOneOf(out Token token, params int[] ids);
+		bool TryAcceptOneOf(out Token token, params TokenID[] ids);
 
 		/// <summary>
 		/// Accepts the current token, regardless of what it is
@@ -40,7 +40,7 @@ namespace Tempest.Parsing
 		/// </summary>
 		/// <param name="id">The token to expect</param>
 		/// <returns>The token that was expected</returns>
-		Token Expect(int id);
+		Token Expect(TokenID id);
 
 		/// <summary>
 		/// Gets the next token in the stream
@@ -58,6 +58,6 @@ namespace Tempest.Parsing
 		/// </summary>
 		/// <param name="ids">The ids to check</param>
 		/// <returns>true if theres a match, otherwise false</returns>
-		bool CurrentTokenOneOf(params int[] ids);
+		bool CurrentTokenOneOf(params TokenID[] ids);
 	}
 }

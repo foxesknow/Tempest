@@ -11,7 +11,7 @@ using Tempest.Parsing;
 namespace Tests.Tempest.Parsing
 {
     [TestFixture]
-    public class DefaultTokenizerState
+    public class DefaultTokenizerStateTests
     {
         [Test]
         public void NoScript()

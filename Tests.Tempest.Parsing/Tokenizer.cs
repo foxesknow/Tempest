@@ -13,14 +13,14 @@ namespace Tests.Tempest.Parsing
 {
     internal class Tokenizer : BaseTokenizer
     {
-        public Tokenizer(TextReader reader, Dictionary<string, int>? keywords, Dictionary<string, int>? operators) : base(reader)
+        public Tokenizer(TextReader reader, Dictionary<string, TokenID>? keywords, Dictionary<string, TokenID>? operators) : base(reader)
         {
             this.Keywords = (keywords ?? new());
             this.Operators = (operators ?? new());
         }
 
-        public override IReadOnlyDictionary<string, int> Keywords{get;}
+        public override IReadOnlyDictionary<string, TokenID> Keywords{get;}
 
-        public override IReadOnlyDictionary<string, int> Operators{get;}
+        public override IReadOnlyDictionary<string, TokenID> Operators{get;}
     }
 }
