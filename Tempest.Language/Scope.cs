@@ -7,44 +7,55 @@ namespace Tempest.Language
 {
     public class Scope
     {
-        private readonly Scope? m_Previous;
-
-        private readonly Dictionary<string, object?> m_Bindings = new();
+        private readonly Dictionary<Identifier, object?> m_Bindings = new();
 
         public Scope()
         {
+            this.Previous = null;
         }
 
         private Scope(Scope previous)
         {
-            m_Previous = previous;
+            this.Previous = previous;
         }
 
-        public bool IsBound(string name)
-        {
-            if(m_Bindings.ContainsKey(name)) return true;
-            if(m_Previous is not null) return m_Previous.IsBound(name);
+        private Scope? Previous{get;}
 
+        private IReadOnlyDictionary<Identifier, object?> Bindings
+        {
+            get{return m_Bindings;}
+        }
+
+        public bool IsBound(Identifier name)
+        {
+            if(name.IsInvalid) throw new LanguageException("invalid name");
+
+            for(var scope = this; scope is not null; scope = scope.Previous)
+            {
+                if(scope.Bindings.ContainsKey(name)) return true;
+            }
+            
             return false;
         }
 
-        public void Bind(string name, object? value)
+        public void Bind(Identifier name, object? value)
         {
+            if(name.IsInvalid) throw new LanguageException("invalid name");
+            if(m_Bindings.ContainsKey(name)) throw new LanguageException($"name is already bound: {name}");
+
             m_Bindings.Add(name, value);
         }
 
-        public bool TryGetBinding(string name, out object? binding)
+        public bool TryGetBinding(Identifier name, out object? binding)
         {
-            if(m_Bindings.TryGetValue(name, out binding))
+            if(name.IsInvalid) throw new LanguageException("invalid name");
+
+            for(var scope = this; scope is not null; scope = scope.Previous)
             {
-                return true;
+                if(scope.Bindings.TryGetValue(name, out binding)) return true;
             }
 
-            if(m_Previous is not null)
-            {
-                return m_Previous.TryGetBinding(name, out binding);
-            }
-
+            binding = null;
             return false;
         }
 

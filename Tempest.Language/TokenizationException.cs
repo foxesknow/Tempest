@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Tempest.Language
 {
     [Serializable]
-    public class TokenizationException : Exception
+    public class TokenizationException : LanguageException
     {
         public TokenizationException() { }
         public TokenizationException(string message) : base(message) { }
