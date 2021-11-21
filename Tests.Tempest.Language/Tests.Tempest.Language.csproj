@@ -11,6 +11,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Tempest.Parsing\Tempest.Parsing.csproj" />
+	  <ProjectReference Include="..\Tempest.Language\Tempest.Language.csproj" />
 	</ItemGroup>
 </Project>

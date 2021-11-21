@@ -6,7 +6,7 @@ using System.IO;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace Tempest.Parsing
+namespace Tempest.Language
 {
     public abstract class BaseTokenizer : ITokenizer
     {

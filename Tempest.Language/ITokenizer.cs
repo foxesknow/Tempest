@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Parsing
+namespace Tempest.Language
 {
     /// <summary>
 	/// Defines the behaviour of a tokenizer

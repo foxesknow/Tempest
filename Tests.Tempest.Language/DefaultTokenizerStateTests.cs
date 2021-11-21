@@ -6,9 +6,9 @@ using System.IO;
 
 using NUnit.Framework;
 
-using Tempest.Parsing;
+using Tempest.Language;
 
-namespace Tests.Tempest.Parsing
+namespace Tests.Tempest.Language
 {
     [TestFixture]
     public class DefaultTokenizerStateTests

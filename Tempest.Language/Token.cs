@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tempest.Parsing
+namespace Tempest.Language
 {
     public readonly struct Token
     {

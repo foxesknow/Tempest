@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Tempest.Parsing;
+using Tempest.Language;
 
 #nullable enable
 
-namespace Tests.Tempest.Parsing
+namespace Tests.Tempest.Language
 {
     internal class Tokenizer : BaseTokenizer
     {
