@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Parsing
+namespace Tempest.Language
 {
     [Serializable]
-    public class TokenizationException : Exception
+    public class TokenizationException : LanguageException
     {
         public TokenizationException() { }
         public TokenizationException(string message) : base(message) { }

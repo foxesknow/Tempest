@@ -6,12 +6,12 @@ using System.IO;
 
 using NUnit.Framework;
 
-using Tempest.Parsing;
+using Tempest.Language;
 
-namespace Tests.Tempest.Parsing
+namespace Tests.Tempest.Language
 {
     [TestFixture]
-    public class DefaultTokenizerState
+    public class DefaultTokenizerStateTests
     {
         [Test]
         public void NoScript()

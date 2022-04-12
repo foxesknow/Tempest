@@ -6,7 +6,7 @@ using System.IO;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace Tempest.Parsing
+namespace Tempest.Language
 {
     public abstract class BaseTokenizer : ITokenizer
     {
@@ -35,9 +35,9 @@ namespace Tempest.Parsing
 			NextToken();
         }
 
-        public abstract IReadOnlyDictionary<string, int> Keywords{get;}
+        public abstract IReadOnlyDictionary<string, TokenID> Keywords{get;}
         
-        public abstract IReadOnlyDictionary<string, int> Operators{get;}
+        public abstract IReadOnlyDictionary<string, TokenID> Operators{get;}
 
 		/// <summary>
 		/// Returns the next token
@@ -69,15 +69,15 @@ namespace Tempest.Parsing
 		/// </summary>
 		/// <param name="id">The token to accept</param>
 		/// <returns>true if the token could be accepted, otherwise false</returns>
-		public bool TryAccept(int id)
+		public bool TryAccept(TokenID id)
 		{
-			if(m_CurrentToken.ID == BaseTokenID.Unknown || m_CurrentToken.ID != id) return false;
+			if(m_CurrentToken.ID == TokenID.Unknown || m_CurrentToken.ID != id) return false;
 			
 			NextToken();
 			return true;
 		}
 
-		public bool TryAccept(int id, out Token token)
+		public bool TryAccept(TokenID id, out Token token)
 		{
 			if(m_CurrentToken.ID == id)
 			{
@@ -97,12 +97,12 @@ namespace Tempest.Parsing
 		/// <param name="token">On success the token that was accepted</param>
 		/// <param name="ids">A list of ids to try</param>
 		/// <returns>true if a token was accepted, otherwise false</returns>
-		public bool TryAcceptOneOf(out Token token, params int[] ids)
+		public bool TryAcceptOneOf(out Token token, params TokenID[] ids)
 		{
 			bool accepted = false;
 			token = Token.None;
 
-			if(m_CurrentToken.ID == BaseTokenID.Unknown) return false;
+			if(m_CurrentToken.ID == TokenID.Unknown) return false;
 
 			for(int i = 0; i <ids.Length && !accepted; i++)
 			{
@@ -123,7 +123,7 @@ namespace Tempest.Parsing
 		/// </summary>
 		/// <param name="id">The token to expect</param>
 		/// <returns>The token that was expected</returns>
-		public Token Expect(int id)
+		public Token Expect(TokenID id)
 		{
 			var current = m_CurrentToken;
 		
@@ -140,7 +140,7 @@ namespace Tempest.Parsing
 		/// </summary>
 		/// <param name="ids">The ids to check</param>
 		/// <returns>true if theres a match, otherwise false</returns>
-		public bool CurrentTokenOneOf(params int[] ids)
+		public bool CurrentTokenOneOf(params TokenID[] ids)
 		{
 			return ids.Contains(m_CurrentToken.ID);
 		}
@@ -168,7 +168,7 @@ namespace Tempest.Parsing
             while(peek == commentChar)
 			{
 				NextChar();
-				for(; peek!='\n'; NextChar())
+				for(; peek != '\n'; NextChar())
 				{
 					peek = PeekChar();
 					if(peek == 0) return Token.None;
@@ -212,7 +212,7 @@ namespace Tempest.Parsing
 			}
 			else
 			{
-				return new Token(BaseTokenID.Symbol, symbol);
+				return new Token(TokenID.Symbol, symbol);
 			}
 		}
 
@@ -250,7 +250,7 @@ namespace Tempest.Parsing
 				ThrowException("no close string encountered");
 			}
 			
-			return new Token(BaseTokenID.String, builder.ToString());
+			return new Token(TokenID.String, builder.ToString());
 		}
 
 		/// <summary>
@@ -273,7 +273,7 @@ namespace Tempest.Parsing
 				ThrowException("could not find close of character sequence");
 			}
 			
-			return new Token(BaseTokenID.Char,new string(c,1),c);
+			return new Token(TokenID.Char,new string(c,1),c);
 		}
 
 		/// <summary>
@@ -360,7 +360,7 @@ namespace Tempest.Parsing
 				}
 			}			
 			
-			return new Token(BaseTokenID.Number, number, convertedNumber);
+			return new Token(TokenID.Number, number, convertedNumber);
 		}
 
 		/// <summary>
@@ -398,7 +398,7 @@ namespace Tempest.Parsing
 				converted = long.Parse(hexNumber, NumberStyles.HexNumber, null);
 			}
 			
-			return new Token(BaseTokenID.Number, hexNumber, converted);
+			return new Token(TokenID.Number, hexNumber, converted);
 		}
 		
 		/// <summary>
@@ -409,7 +409,7 @@ namespace Tempest.Parsing
 		{
 			var c = NextChar();
 			
-			if(c==0) return Token.None;
+			if(c == 0) return Token.None;
 			
 			var token = Token.Unknown;
 			
@@ -433,7 +433,7 @@ namespace Tempest.Parsing
 				}
 			}
 			
-			if(this.Operators.TryGetValue(op,out var id))
+			if(this.Operators.TryGetValue(op, out var id))
 			{
 				token = new Token(id, op);
 			}	
@@ -581,7 +581,7 @@ namespace Tempest.Parsing
 			};
 		}
 
-		private string TokenIDToText(int id)
+		private string TokenIDToText(TokenID id)
 		{
 			 foreach(var pair in this.Keywords)
 			 {
