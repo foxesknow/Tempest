@@ -13,11 +13,11 @@ namespace Tempest.TaskTypes.DelayedData
     /// <typeparam name="T"></typeparam>
     public class Delayed<T>
     {
-        private BoxedValue m_Value;
-        private readonly Func<T> m_Factory;
+        private BoxedValue? m_Value;
+        private readonly Func<T>? m_Factory;
         
-        private object m_SyncRoot;
-        private TaskCompletionSource<T> m_Tcs;
+        private object? m_SyncRoot;
+        private TaskCompletionSource<T>? m_Tcs;
 
         /// <summary>
         /// Creates a delayed value that has the specified value
@@ -117,7 +117,7 @@ namespace Tempest.TaskTypes.DelayedData
                 {
                     try
                     {
-                        var value = m_Factory();
+                        var value = m_Factory!();
                         m_Value = new BoxedValue(value);
                     }
                     catch(Exception e)
@@ -152,12 +152,13 @@ namespace Tempest.TaskTypes.DelayedData
 
         class BoxedValue
         {
-            private readonly Exception m_Exception;
+            private readonly Exception? m_Exception;
             private readonly T m_Value;
 
             public BoxedValue(Exception exception)
             {
                 m_Exception = exception;
+                m_Value = default!;
             }
 
             public BoxedValue(T value)
