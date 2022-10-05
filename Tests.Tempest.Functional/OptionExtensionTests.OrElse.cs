@@ -13,66 +13,66 @@ namespace Tests.Tempest.Functional
     public partial class OptionExtensionTests
     {
         [Test]
-        public void Or()
+        public void OrElse()
         {
             Option<int> x = 10;
-            var y = x.Or(20);
+            var y = x.OrElse(20);
             Assert.That(y.Value(), Is.EqualTo(10));
         }
 
         [Test]
-        public void Or_None()
+        public void OrElse_None()
         {
             Option<int> x = default;
-            var y = x.Or(20);
+            var y = x.OrElse(20);
             Assert.That(y.Value(), Is.EqualTo(20));
         }
 
         [Test]
-        public void Or_None_None()
+        public void OrElse_None_None()
         {
             Option<int> x = default;
-            var y = x.Or(Option.None);
+            var y = x.OrElse(Option.None);
             Assert.That(y, Is.EqualTo(Option.None));
         }
 
         [Test]
-        public void Or_Func()
+        public void OrElse_Func()
         {
             Option<int> x = default;
-            var y = x.Or(static () => 20);
+            var y = x.OrElse(static () => 20);
             Assert.That(y.Value(), Is.EqualTo(20));
         }
 
         [Test]
-        public void Or_Func_NotCalled()
+        public void OrElse_Func_NotCalled()
         {
             bool called = false;
 
             Option<int> x = 10;
-            var y = x.Or(() => {called = true; return 20;});
+            var y = x.OrElse(() => {called = true; return 20;});
             Assert.That(y.Value(), Is.EqualTo(10));
             Assert.That(called, Is.False);
         }
 
         [Test]
-        public void Or_Func_State()
+        public void OrElse_Func_State()
         {
             var answer = 20;
 
             Option<int> x = default;
-            var y = x.Or(answer, static state => state);
+            var y = x.OrElse(answer, static state => state);
             Assert.That(y.Value(), Is.EqualTo(20));
         }
 
         [Test]
-        public void Or_Func_State_NotCalled()
+        public void OrElse_Func_State_NotCalled()
         {
             var answer = 20;
             bool called = false;
 
             Option<int> x = default;
-            var y = x.Or(answer, state => {called = true; return state;});
+            var y = x.OrElse(answer, state => {called = true; return state;});
             Assert.That(y.Value(), Is.EqualTo(20));
             Assert.That(called, Is.True);
         }

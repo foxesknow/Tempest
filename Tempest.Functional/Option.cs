@@ -17,7 +17,7 @@ namespace Tempest.Functional
         private readonly T m_Value;
 
         /// <summary>
-        /// Initializes the instance
+        /// Initializes the instance to some value
         /// </summary>
         /// <param name="value"></param>
         public Option(T value)
@@ -84,6 +84,31 @@ namespace Tempest.Functional
         }
 
         /// <summary>
+        /// Implements a match statement, calling the appropriate function
+        /// This implementation takes state data to allow callers to avoid memory allocations
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="state">State data to pass to the functions</param>
+        /// <param name="some">Called if the option is some</param>
+        /// <param name="none">Called if the option in none</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">One of the functions was none</exception>
+        public TResult Match<TState, TResult>(TState state, Func<T, TState, TResult> some, Func<TState, TResult> none)
+        {
+            if(some is null) throw new ArgumentNullException(nameof(some));
+            if(none is null) throw new ArgumentNullException(nameof(none));
+
+            if(IsSome)
+            {
+                return some(m_Value, state);
+            }
+            else
+            {
+                return none(state);
+            }
+        }
+
+        /// <summary>
         /// Bind is for working with functions that return an option
         /// (This is the equivilant of Map)
         /// </summary>
@@ -109,10 +134,10 @@ namespace Tempest.Functional
         /// </summary>
         /// <typeparam name="TState"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="state"></param>
-        /// <param name="selector"></param>
+        /// <param name="state">State data to pass to the selector</param>
+        /// <param name="selector">The function to call with the data in the option</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">selector is null</exception>
         public Option<TResult> Select<TState, TResult>(TState state, Func<T, TState, TResult> selector)
         {
             if(selector is null) throw new ArgumentNullException(nameof(selector));
@@ -130,16 +155,16 @@ namespace Tempest.Functional
         /// (This is the equivilant of Bind)
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="selector"></param>
+        /// <param name="binder"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public Option<TResult> Bind<TResult>(Func<T, Option<TResult>> selector)
+        /// <exception cref="ArgumentNullException">binder is null</exception>
+        public Option<TResult> Bind<TResult>(Func<T, Option<TResult>> binder)
         {
-            if(selector is null) throw new ArgumentNullException(nameof(selector));
+            if(binder is null) throw new ArgumentNullException(nameof(binder));
 
             if(IsNone) return default;
 
-            return selector(m_Value);
+            return binder(m_Value);
         }
 
         /// <summary>
@@ -148,24 +173,24 @@ namespace Tempest.Functional
         /// </summary>
         /// <typeparam name="TState"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="state"></param>
-        /// <param name="selector"></param>
+        /// <param name="state">The state data to pass to the binder</param>
+        /// <param name="binder">The function to call with the data in the binder</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public Option<TResult> Bind<TState, TResult>(TState state, Func<T, TState, Option<TResult>> selector)
+        /// <exception cref="ArgumentNullException">binder is null</exception>
+        public Option<TResult> Bind<TState, TResult>(TState state, Func<T, TState, Option<TResult>> binder)
         {
-            if(selector is null) throw new ArgumentNullException(nameof(selector));
+            if(binder is null) throw new ArgumentNullException(nameof(binder));
 
             if(IsNone) return default;
 
-            return selector(m_Value, state);
+            return binder(m_Value, state);
         }        
 
         /// <summary>
         /// Attempts to get the value from the option
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Set to the data in the option on success</param>
+        /// <returns>true if there is some data in the option, otherwise false</returns>
         public bool TryGetValue([MaybeNullWhen(false)] out T value)
         {
             if(IsSome)
@@ -191,9 +216,9 @@ namespace Tempest.Functional
         /// <summary>
         /// Returns the contained value if some, otherwise calls the factory to get a default value
         /// </summary>
-        /// <param name="defaultValueFactory"></param>
+        /// <param name="defaultValueFactory">Called to generate a value if the option is none</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">defaultValueFactory is null</exception>
         public T ValueOr(Func<T> defaultValueFactory)
         {
             if(defaultValueFactory is null) throw new ArgumentNullException(nameof(defaultValueFactory));
@@ -205,9 +230,9 @@ namespace Tempest.Functional
         /// Returns the contained value if some, otherwise calls the factory to get a default value
         /// </summary>
         /// <param name="state">Any additional state to pass to the factory</param>
-        /// <param name="defaultValueFactory"></param>
+        /// <param name="defaultValueFactory">Called to generate a value if the option is none</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">defaultValueFactory is null</exception>
         public T ValueOr<TState>(TState state, Func<TState, T> defaultValueFactory)
         {
             if(defaultValueFactory is null) throw new ArgumentNullException(nameof(defaultValueFactory));

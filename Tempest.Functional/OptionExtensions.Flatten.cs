@@ -8,6 +8,12 @@ namespace Tempest.Functional
 {
     public static partial class OptionExtensions
     {
+        /// <summary>
+        /// Extracts an option from another option
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static Option<T> Flatten<T>(in this Option<Option<T>> self)
         {
             return self.ValueOr(Option.None);

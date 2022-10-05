@@ -15,19 +15,19 @@ namespace Tempest.Functional
         /// <param name="self"></param>
         /// <param name="other"></param>
         /// <returns></returns>
-        public static Option<T> Or<T>(in this Option<T> self, in Option<T> other)
+        public static Option<T> OrElse<T>(in this Option<T> self, in Option<T> other)
         {
             return self.IsSome ? self : other;
         }
 
-        public static Option<T> Or<T>(in this Option<T> self, Func<Option<T>> function)
+        public static Option<T> OrElse<T>(in this Option<T> self, Func<Option<T>> function)
         {
             if(function is null) throw new ArgumentNullException(nameof(function));
 
             return self.IsSome ? self : function();
         }
 
-        public static Option<T> Or<T, TState>(in this Option<T> self, TState state, Func<TState, Option<T>> function)
+        public static Option<T> OrElse<T, TState>(in this Option<T> self, TState state, Func<TState, Option<T>> function)
         {
             if(function is null) throw new ArgumentNullException(nameof(function));
 

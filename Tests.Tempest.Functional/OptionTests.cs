@@ -76,6 +76,38 @@ namespace Tests.Tempest.Functional
         }
 
         [Test]
+        public void Match_Some_State()
+        {
+            int delta = 1;
+            Option<string> name = "Hello";
+
+            var length = name.Match
+            (
+                delta,
+                some: (value, state) => value.Length + state,
+                none: state => state
+            );
+
+            Assert.That(length, Is.EqualTo(6));
+        }
+
+        [Test]
+        public void Match_None_State()
+        {
+            int delta = 1;
+            Option<string> name = Option.None;
+
+            var length = name.Match
+            (
+                delta,
+                some: (value, state) => value.Length + state,
+                none: state => state
+            );
+
+            Assert.That(length, Is.EqualTo(1));
+        }
+
+        [Test]
         public void Select_Some()
         {
             Option<int> x = 80;
@@ -90,6 +122,53 @@ namespace Tests.Tempest.Functional
             Option<int> x = Option.None;
             var y = x.Select(static y => y * 2);
             Assert.That(y, Is.EqualTo(Option.None));
+        }
+
+        [Test]
+        public void Select_Some_State()
+        {
+            var multiplier = 2;
+            Option<int> x = 80;
+
+            var y = x.Select(multiplier, static (y, state) => y * state);
+            Assert.That(y, Is.Not.EqualTo(Option.None));
+            Assert.That(y.Value(), Is.EqualTo(160));
+        }
+
+        [Test]
+        public void Select_None_State()
+        {
+            var multiplier = 2;
+            Option<int> x = Option.None;
+            
+            var y = x.Select(multiplier, static (y, state) => y * state);
+            Assert.That(y, Is.EqualTo(Option.None));
+        }
+
+        [Test]
+        public void Bind()
+        {
+            Option<string> name = "Robert";
+            var nameLength = name.Bind(y => GetLength(y));
+            Assert.That(nameLength.Value(), Is.EqualTo(6));
+
+            Option<string> address = default;
+            var addressLength = address.Bind(y => GetLength(y));
+            Assert.That(addressLength, Is.EqualTo(Option.None));            
+        }
+
+        [Test]
+        public void Bind_State()
+        {
+            var surname= "Smith";
+
+            Option<string> name = "Robert";
+            var nameLength = name.Bind(surname, (y, state) => GetLength(y + state));
+            Assert.That(nameLength.Value(), Is.EqualTo(11));
+
+            Option<string> address = default;
+            var addressLength = address.Bind(surname, (y, state) => GetLength(y + state));
+            Assert.That(addressLength, Is.EqualTo(Option.None));            
         }
 
         [Test]
@@ -188,6 +267,23 @@ namespace Tests.Tempest.Functional
 
             Option<int> x = Option.None;
             Assert.That(x.ValueOr(factory), Is.EqualTo(999));
+            Assert.That(called, Is.True);
+        }
+
+        [Test]
+        public void ValueOr_Func_None_State()
+        {
+            var defaultValue = 999;
+            bool called = false;
+
+            Func<int, int> factory = state =>
+            {
+                called = true;
+                return state;
+            };
+
+            Option<int> x = Option.None;
+            Assert.That(x.ValueOr(defaultValue, factory), Is.EqualTo(999));
             Assert.That(called, Is.True);
         }
 
@@ -386,6 +482,13 @@ namespace Tests.Tempest.Functional
  
             var m = f(a); 
             Assert.That(m.Bind(g).Bind(h), Is.EqualTo(m.Bind(x => g(x).Bind(h))));
+        }
+
+        private static Option<int> GetLength(string? value)
+        {
+            if(value is null) return Option.None;
+
+            return value.Length;
         }
     }
 }
