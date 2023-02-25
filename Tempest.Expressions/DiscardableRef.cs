@@ -12,8 +12,14 @@ namespace Tempest.Expressions
     /// <typeparam name="T"></typeparam>
     public static class DiscardableRef<T>
     {
+        /// <summary>
+        /// The default value for T
+        /// </summary>
         public static T Value = default!;
 
+        /// <summary>
+        /// A reference to a variable of type T
+        /// </summary>
         public static ref T RefValue
         {
             get{return ref Value;}

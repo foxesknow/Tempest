@@ -14,7 +14,7 @@ namespace Tempest.Expressions
         /// Extracts the FieldInfo from a lamda representing a field access.
         /// This method is for getting static fields
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
         /// <param name="delegate"></param>
         /// <returns></returns>
         public static FieldInfo GetField<TOut>(Expression<Func<TOut>> @delegate)

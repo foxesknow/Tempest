@@ -9,11 +9,23 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
+        /// <summary>
+        /// Generates a short circuited AND expression
+        /// </summary>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
         public static Expression AndAlso(params Expression[] expressions)
         {
             return AndAlso((IEnumerable<Expression>)expressions);
         }
 
+        /// <summary>
+        /// Generates a short circuited AND expression
+        /// </summary>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public static Expression AndAlso(IEnumerable<Expression> expressions)
         {
             if(expressions == null) throw new ArgumentNullException(nameof(expressions));

@@ -27,7 +27,7 @@ namespace Tempest.Expressions
         /// }
         /// </code>
         /// </example>
-        /// <param name="deferExpression"></param>
+        /// <param name="defer"></param>
         /// <param name="body"></param>
         /// <returns></returns>
         public static Expression Defer(Expression defer, Expression body)

@@ -14,7 +14,7 @@ namespace Tempest.Expressions
         /// Extracts the PropertyInfo from a lamda representing a property access.
         /// This method is for getting static properties
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
         /// <param name="delegate"></param>
         /// <returns></returns>
         public static PropertyInfo GetProperty<TOut>(Expression<Func<TOut>> @delegate)

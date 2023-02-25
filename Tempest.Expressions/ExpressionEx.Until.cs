@@ -9,6 +9,14 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
+        /// <summary>
+        /// Generates an expression that will execute a body of conde until the predicate is false
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="bodyBuilder"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public static Expression Until(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
             if(predicate == null) throw new ArgumentNullException(nameof(predicate));

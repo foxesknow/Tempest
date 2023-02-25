@@ -8,8 +8,21 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Tempest.Expressions
 {
+    /// <summary>
+    /// Useful type extension methods
+    /// </summary>
     public static class TypeExtensions
     {
+        /// <summary>
+        /// Gets a method
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="bindingFlags"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public static MethodInfo GetMethod(this Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
         {
             if(type == null) throw new ArgumentNullException(nameof(type));
@@ -20,6 +33,15 @@ namespace Tempest.Expressions
             return method;
         }
 
+        /// <summary>
+        /// Attempts to get a method
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="bindingFlags"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static MethodInfo? TryGetMethod(this Type type, string name, BindingFlags bindingFlags, params Type[] parameters)
         {
             if(type == null) throw new ArgumentNullException(nameof(type));
@@ -28,6 +50,14 @@ namespace Tempest.Expressions
             return method;
         }
 
+        /// <summary>
+        /// Attempts to get the specified generic type 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="genericType"></param>
+        /// <param name="implementation"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static bool TryGetGenericImplementation(this Type type, Type genericType, [NotNullWhen(true)] out Type? implementation)
         {
             if(type == null) throw new ArgumentNullException(nameof(type));

@@ -9,21 +9,50 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
+        /// <summary>
+        /// Pre defined constants
+        /// </summary>
         public static class Constants
         {
+            /// <summary>
+            /// A void expression
+            /// </summary>
             public static readonly Expression Void = Expression.Default(typeof(void));
 
+            /// <summary>
+            /// Boolean constants
+            /// </summary>
             public static class Bool
             {
+                /// <summary>
+                /// A true constant expression
+                /// </summary>
                 public static readonly Expression True = Expression.Constant(true, typeof(bool));
+                
+                /// <summary>
+                /// A false constant expression
+                /// </summary>
                 public static readonly Expression False = Expression.Constant(false, typeof(bool));
             }
 
+            /// <summary>
+            /// Useful integer constants
+            /// </summary>
             public static class Int
             {
+                /// <summary>
+                /// Zero as a constant
+                /// </summary>
                 public static readonly Expression Int_0 = Expression.Constant(0, typeof(int));
             }
 
+            /// <summary>
+            /// Returns the zero constant for a type, if applicable
+            /// </summary>
+            /// <param name="type"></param>
+            /// <returns></returns>
+            /// <exception cref="ArgumentNullException"></exception>
+            /// <exception cref="ArgumentException"></exception>
             public static ConstantExpression ZeroFor(Type type)
             {
                 if(type == null) throw new ArgumentNullException(nameof(type));

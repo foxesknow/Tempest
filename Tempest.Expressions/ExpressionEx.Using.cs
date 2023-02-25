@@ -24,7 +24,7 @@ namespace Tempest.Expressions
         /// </code>
         /// </example>
         /// <param name="using"></param>
-        /// <param name="body"></param>
+        /// <param name="bodyBuilder"></param>
         /// <returns></returns>
         public static Expression Using(Expression @using, UsingBuilder bodyBuilder)
         {

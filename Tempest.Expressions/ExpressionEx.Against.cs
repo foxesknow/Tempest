@@ -8,6 +8,9 @@ using System.Linq.Expressions;
 
 namespace Tempest.Expressions
 {
+    /// <summary>
+    /// Useful expression methods
+    /// </summary>
     public static partial class ExpressionEx
     {
         /// <summary>

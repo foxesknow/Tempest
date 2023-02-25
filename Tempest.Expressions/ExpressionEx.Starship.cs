@@ -9,9 +9,9 @@ namespace Tempest.Expressions
     public static partial class ExpressionEx
     {
         /// <summary>
-        /// An implementation of lhs <=> rhs :
+        /// An implementation of lhs <![CDATA[<=>]]> rhs :
         /// 
-        /// <!<![CDATA[
+        /// <![CDATA[
         /// The expression evalues to:
         ///     
         ///      0  if lhs == rhs

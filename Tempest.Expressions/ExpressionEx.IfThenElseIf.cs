@@ -9,6 +9,12 @@ namespace Tempest.Expressions
 {
     public static partial class ExpressionEx
     {
+        /// <summary>
+        /// Makes a tuple consisting of a test and the expression to execute if the test is true
+        /// </summary>
+        /// <param name="test"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static (Expression Test, Expression Body) MakeIfThen(Expression test, Expression body)
         {
             return (test, body);
@@ -68,7 +74,7 @@ namespace Tempest.Expressions
         /// </code>
         /// </example>
         /// <param name="conditions"></param>
-        /// <param name="finalElse"></param>
+        /// <param name="default"></param>
         /// <returns></returns>
         public static Expression IfThenElse(IEnumerable<(Expression Test, Expression Body)> conditions, Expression @default)
         {

@@ -14,7 +14,7 @@ namespace Tempest.Expressions
         /// </summary>
         /// <example>
         /// <code>
-        /// <!<![CDATA[
+        /// <![CDATA[
         /// while(true)
         /// {
         ///     body
