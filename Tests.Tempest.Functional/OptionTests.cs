@@ -34,10 +34,27 @@ namespace Tests.Tempest.Functional
         }
 
         [Test]
+        public void Initialization_ForceNull()
+        {
+            Option<string> option = new(null!);
+            Assert.That(option.IsSome, Is.False);
+            Assert.That(option.IsNone, Is.True);
+        }
+
+        [Test]
         public void Implicit_Reference()
         {
             Option<string> name = null;
             Assert.That(name, Is.EqualTo(Option.None));
+        }
+
+        [Test]
+        public void Implicit_FromOption()
+        {
+            Option<int> age = 10;
+            Option<int> age2 = age;
+
+            Assert.That(age.Value(), Is.EqualTo(age2.Value()));
         }
 
         [Test]
@@ -84,8 +101,8 @@ namespace Tests.Tempest.Functional
             var length = name.Match
             (
                 delta,
-                some: (value, state) => value.Length + state,
-                none: state => state
+                some: static (value, delta) => value.Length + delta,
+                none: static delta => delta
             );
 
             Assert.That(length, Is.EqualTo(6));
@@ -100,8 +117,8 @@ namespace Tests.Tempest.Functional
             var length = name.Match
             (
                 delta,
-                some: (value, state) => value.Length + state,
-                none: state => state
+                some: static (value, state) => value.Length + state,
+                none: static state => state
             );
 
             Assert.That(length, Is.EqualTo(1));
@@ -365,13 +382,6 @@ namespace Tests.Tempest.Functional
         }
 
         [Test]
-        public void AsString_Null()
-        {
-            Option<string?> name = new(null);
-            Assert.That(name.ToString(), Is.EqualTo("null"));
-        }
-
-        [Test]
         public void AsString_None()
         {
             Option<string> name = default;
@@ -379,34 +389,34 @@ namespace Tests.Tempest.Functional
         }
 
         [Test]
-        public void FromNullable_HasValue()
+        public void From_Value_HasValue()
         {
             int? id = 10;
-            var value = Option.FromNullable(id);
+            var value = Option.From(id);
             Assert.That(value.ValueOr(-1), Is.EqualTo(10));
         }
 
         [Test]
-        public void FromNullable_IsNull()
+        public void From_Value_IsNull()
         {
             int? id = null;
-            var value = Option.FromNullable(id);
+            var value = Option.From(id);
             Assert.That(value.ValueOr(-1), Is.EqualTo(-1));
         }
 
         [Test]
-        public void FromObject_HasValue()
+        public void From_Reference_HasValue()
         {
             var name = "Bob";
-            var value = Option.FromObject(name);
+            var value = Option.From(name);
             Assert.That(value.ValueOr("Fred"), Is.EqualTo("Bob"));
         }
 
         [Test]
-        public void FromObject_IsNull()
+        public void From_Reference_IsNull()
         {
             string? name = null;
-            var value = Option.FromObject(name);
+            var value = Option.From(name);
             Assert.That(value.ValueOr("Fred"), Is.EqualTo("Fred"));
         }
 

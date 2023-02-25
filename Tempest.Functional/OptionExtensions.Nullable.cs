@@ -17,7 +17,7 @@ namespace Tempest.Functional
         /// <param name="self"></param>
         /// <param name="_">Ensure the method is called only for value types. Just accept the default value</param>
         /// <returns></returns>
-        public static T? ToNullable<T>(in Option<T> self, RequireStruct<T>? _ = null) where T : struct
+        public static T? ToNullable<T>(in this Option<T> self, RequireStruct<T>? _ = null) where T : struct
         {
             if(self.IsSome)
             {
@@ -30,13 +30,13 @@ namespace Tempest.Functional
         }
 
         /// <summary>
-        /// Converts an option to a nullable value
+        /// Converts an option to a nullable reference
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="self"></param>
         /// <param name="_">Ensure the method is called only for reference types. Just accept the default value</param>
         /// <returns></returns>
-        public static T? ToNullable<T>(in Option<T> self, RequireClass<T>? _ = null) where T : class
+        public static T? ToNullable<T>(in this Option<T> self, RequireClass<T>? _ = null) where T : class
         {
             if(self.IsSome)
             {
@@ -46,17 +46,6 @@ namespace Tempest.Functional
             {
                 return null;
             }
-        }
-
-        /// <summary>
-        /// Conserts a nullable value to an option
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static Option<T> ToOption<T>(in T? value) where T : struct
-        {
-            return value.HasValue ? new(value.Value) : default;
         }
     }
 }

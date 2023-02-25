@@ -15,9 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempest.Language", "Tempest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Tempest.Language", "Tests.Tempest.Language\Tests.Tempest.Language.csproj", "{A695E7A1-CEC7-4CB4-A70E-30BDCDD8B72B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tempest.Functional", "Tempest.Functional\Tempest.Functional.csproj", "{CD02AC85-6006-4517-991C-8FBEDD3FBDF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempest.Functional", "Tempest.Functional\Tempest.Functional.csproj", "{CD02AC85-6006-4517-991C-8FBEDD3FBDF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Tempest.Functional", "Tests.Tempest.Functional\Tests.Tempest.Functional.csproj", "{7232D1C8-946A-4FFD-90D4-7B59F3BC7539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Tempest.Functional", "Tests.Tempest.Functional\Tests.Tempest.Functional.csproj", "{7232D1C8-946A-4FFD-90D4-7B59F3BC7539}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{31D13453-2982-4E31-B110-F0C8B51DA606}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

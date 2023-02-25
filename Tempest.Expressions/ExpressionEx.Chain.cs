@@ -11,7 +11,7 @@ namespace Tempest.Expressions
     public static partial class ExpressionEx
     {
         /// <summary>
-        /// Simplifies chainng together conditional access
+        /// Simplifies chaining together conditional access
         /// </summary>
         /// <example>
         /// <code>
