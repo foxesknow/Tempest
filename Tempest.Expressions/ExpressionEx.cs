@@ -61,6 +61,22 @@ namespace Tempest.Expressions
             };
         }
 
+        public static bool IsTupleType(Type type)
+        {
+            if(type.IsGenericType == false) return false;
+
+            var genericType = type.GetGenericTypeDefinition();
+
+            return genericType == typeof(ValueTuple<>) ||
+                   genericType == typeof(ValueTuple<,>) ||
+                   genericType == typeof(ValueTuple<,,>) ||
+                   genericType == typeof(ValueTuple<,,,>) ||
+                   genericType == typeof(ValueTuple<,,,,>) ||
+                   genericType == typeof(ValueTuple<,,,,,>) ||
+                   genericType == typeof(ValueTuple<,,,,,,>) ||
+                   genericType == typeof(ValueTuple<,,,,,,,>);
+        }
+
         /// <summary>
         /// Returns a parameter for the spcified type
         /// </summary>
