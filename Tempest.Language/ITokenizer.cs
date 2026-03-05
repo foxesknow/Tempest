@@ -28,7 +28,7 @@ namespace Tempest.Language
 		/// <param name="token">On success the token that was accepted</param>
 		/// <param name="ids">A list of ids to try</param>
 		/// <returns>true if a token was accepted, otherwise false</returns>
-		bool TryAcceptOneOf(out Token token, params TokenID[] ids);
+		bool TryAcceptOneOf(out Token token, params Span<TokenID> ids);
 
 		/// <summary>
 		/// Accepts the current token, regardless of what it is
@@ -58,6 +58,6 @@ namespace Tempest.Language
 		/// </summary>
 		/// <param name="ids">The ids to check</param>
 		/// <returns>true if theres a match, otherwise false</returns>
-		bool CurrentTokenOneOf(params TokenID[] ids);
+		bool CurrentTokenOneOf(params Span<TokenID> ids);
 	}
 }

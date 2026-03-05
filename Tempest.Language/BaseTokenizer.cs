@@ -97,14 +97,14 @@ namespace Tempest.Language
 		/// <param name="token">On success the token that was accepted</param>
 		/// <param name="ids">A list of ids to try</param>
 		/// <returns>true if a token was accepted, otherwise false</returns>
-		public bool TryAcceptOneOf(out Token token, params TokenID[] ids)
+		public bool TryAcceptOneOf(out Token token, params Span<TokenID> ids)
 		{
 			bool accepted = false;
 			token = Token.None;
 
 			if(m_CurrentToken.ID == TokenID.Unknown) return false;
 
-			for(int i = 0; i <ids.Length && !accepted; i++)
+			for(int i = 0, length = ids.Length; i < length && !accepted; i++)
 			{
 				accepted = (ids[i] == m_CurrentToken.ID);
 			}
@@ -140,7 +140,7 @@ namespace Tempest.Language
 		/// </summary>
 		/// <param name="ids">The ids to check</param>
 		/// <returns>true if theres a match, otherwise false</returns>
-		public bool CurrentTokenOneOf(params TokenID[] ids)
+		public bool CurrentTokenOneOf(params Span<TokenID> ids)
 		{
 			return ids.Contains(m_CurrentToken.ID);
 		}
