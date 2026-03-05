@@ -30,8 +30,8 @@ public partial class ExpressionEx
         /// <returns></returns>
         public static Expression ForEach(Expression sequence, LetLoopBodyBuilder bodyBuilder)
         {
-            if(sequence == null) throw new ArgumentNullException(nameof(sequence));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(sequence);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             var whileBuilder = MakeWhileBuilder(null);
 

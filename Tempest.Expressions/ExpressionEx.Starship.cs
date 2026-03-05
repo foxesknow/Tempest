@@ -28,8 +28,8 @@ public static partial class ExpressionEx
         /// <exception cref="ArgumentException"></exception>
         public static Expression Starship(Expression lhs, Expression rhs)
         {
-            if(lhs is null) throw new ArgumentNullException(nameof(lhs));
-            if(rhs is null) throw new ArgumentNullException(nameof(rhs));
+            ArgumentNullException.ThrowIfNull(lhs);
+            ArgumentNullException.ThrowIfNull(rhs);
 
             if(lhs.Type != rhs.Type) throw new ArgumentException("lhs and rhs do not have the same type");
 

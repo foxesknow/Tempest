@@ -62,7 +62,7 @@ public static partial class ExpressionEx
 
         private static MethodInfo DoGetMethod<T>(Expression<T> @delegate) where T : Delegate
         {
-            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+            ArgumentNullException.ThrowIfNull(@delegate);
 
             if(@delegate is LambdaExpression lambda && lambda.Body is MethodCallExpression methodCall)
             {

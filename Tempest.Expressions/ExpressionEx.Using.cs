@@ -30,8 +30,8 @@ public partial class ExpressionEx
         /// <returns></returns>
         public static Expression Using(Expression @using, UsingBuilder bodyBuilder)
         {
-            if(@using == null) throw new ArgumentNullException(nameof(@using)); 
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder)); 
+            ArgumentNullException.ThrowIfNull(@using);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             if(@using.Type.IsValueType)
             {

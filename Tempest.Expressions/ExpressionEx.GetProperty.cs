@@ -39,8 +39,8 @@ public static partial class ExpressionEx
 
         private static PropertyInfo DoGetProperty<T>(Expression<T> @delegate) where T : Delegate
         {
-            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
-
+            ArgumentNullException.ThrowIfNull(@delegate);
+            
             if(@delegate is LambdaExpression lambda && lambda.Body is MemberExpression member && member.Member is PropertyInfo property)
             {
                 return property;

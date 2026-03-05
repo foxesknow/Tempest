@@ -35,9 +35,9 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression ForEachElse(Expression sequence, LetLoopBodyBuilder bodyBuilder, Expression elseBody)
         {
-            if(sequence == null) throw new ArgumentNullException(nameof(sequence));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
-            if(elseBody == null) throw new ArgumentNullException(nameof(elseBody));
+            ArgumentNullException.ThrowIfNull(sequence);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
+            ArgumentNullException.ThrowIfNull(elseBody);
 
             var whileBuilder = MakeWhileBuilder(elseBody);
 

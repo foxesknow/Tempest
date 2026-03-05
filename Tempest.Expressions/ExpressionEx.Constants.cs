@@ -72,7 +72,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static ConstantExpression Null(Type type)
         {
-            if(type == null) throw new ArgumentNullException(nameof(type));
+            ArgumentNullException.ThrowIfNull(type);
             if(type.IsValueType) throw new ArgumentException("type is a value type", nameof(type));
 
             return Expression.Constant(null, type);

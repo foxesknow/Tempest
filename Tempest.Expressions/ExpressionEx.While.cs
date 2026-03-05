@@ -58,8 +58,8 @@ public static partial class ExpressionEx
 
         private static Expression WhileImpl(Expression predicate, LoopBodyBuilder bodyBuilder, Expression? elseBody)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(predicate);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             var (@break, @continue) = MakeBreakAndContinueLabels();
 

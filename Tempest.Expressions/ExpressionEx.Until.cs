@@ -21,7 +21,7 @@ public static partial class ExpressionEx
         /// <exception cref="ArgumentException"></exception>
         public static Expression Until(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
+            ArgumentNullException.ThrowIfNull(predicate);
             if(predicate.Type != typeof(bool)) throw new ArgumentException("predicate is not a boolean", nameof(predicate));
 
             var negatedPredicate = Expression.Not(predicate);

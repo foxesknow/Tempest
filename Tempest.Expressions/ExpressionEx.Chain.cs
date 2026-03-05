@@ -40,8 +40,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public Expression Chain(IEnumerable<Func<Expression, Expression>> links)
         {
-            if(instance == null) throw new ArgumentNullException(nameof(instance));
-            if(links == null) throw new ArgumentNullException(nameof(links));
+            ArgumentNullException.ThrowIfNull(links);
 
             var functions = links.ToReadOnlyList();
             if(functions.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(links));

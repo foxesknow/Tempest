@@ -22,7 +22,7 @@ public static partial class ExpressionEx
         /// <exception cref="InvalidOperationException"></exception>
         public static Expression GetTupleItem(Expression tuple, int itemIndex)
         {
-            if(tuple is null) throw new ArgumentNullException(nameof(tuple));
+            ArgumentNullException.ThrowIfNull(tuple);
             if(itemIndex < 1) throw new ArgumentException("index must be at least one", nameof(itemIndex));
 
             if(IsTupleType(tuple.Type) == false) throw new InvalidOperationException("expression does not represent a tuple");

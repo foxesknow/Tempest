@@ -25,8 +25,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public Expression ConditionalCall(MethodInfo method, params Expression[]? arguments)
         {
-            if(instance == null) throw new ArgumentNullException(nameof(instance));
-            if(method == null) throw new ArgumentNullException(nameof(method));
+            ArgumentNullException.ThrowIfNull(method);
 
             if(instance.Type.IsNullable() == false) throw new ArgumentException("instance is not a nullable type", nameof(instance));
 

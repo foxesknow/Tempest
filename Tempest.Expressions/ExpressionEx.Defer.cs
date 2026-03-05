@@ -34,8 +34,8 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression Defer(Expression defer, Expression body)
         {
-            if(defer == null) throw new ArgumentNullException(nameof(defer));
-            if(body == null) throw new ArgumentNullException(nameof(body));
+            ArgumentNullException.ThrowIfNull(defer);
+            ArgumentNullException.ThrowIfNull(body);
 
             return Expression.TryFinally(body, defer);
         }

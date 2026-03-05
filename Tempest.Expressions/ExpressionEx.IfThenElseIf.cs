@@ -80,8 +80,8 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression IfThenElse(IEnumerable<(Expression Test, Expression Body)> conditions, Expression @default)
         {
-            if(conditions == null) throw new ArgumentNullException(nameof(conditions));
-            if(@default == null) throw new ArgumentNullException(nameof(@default));
+            ArgumentNullException.ThrowIfNull(conditions);
+            ArgumentNullException.ThrowIfNull(@default);
 
             var conds = conditions.ToReadOnlyList();
             if(conds.Count == 0) throw new ArgumentException("no conditions", nameof(conditions));

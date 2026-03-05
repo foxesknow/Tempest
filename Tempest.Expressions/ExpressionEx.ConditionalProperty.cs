@@ -24,8 +24,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public Expression ConditionalProperty(PropertyInfo property)
         {
-            if(instance == null) throw new ArgumentNullException(nameof(instance));
-            if(property == null) throw new ArgumentNullException(nameof(property));
+            ArgumentNullException.ThrowIfNull(property);
 
             if(instance.Type.IsNullable() == false) throw new ArgumentNullException("instance is not a nullable type", nameof(instance));
             if(property.CanRead == false) throw new ArgumentException("property not readable", nameof(property));

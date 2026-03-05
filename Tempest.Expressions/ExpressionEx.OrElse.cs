@@ -30,7 +30,7 @@ public static partial class ExpressionEx
         /// <exception cref="ArgumentException"></exception>
         public static Expression OrElse(IEnumerable<Expression> expressions)
         {
-            if(expressions == null) throw new ArgumentNullException(nameof(expressions));
+            ArgumentNullException.ThrowIfNull(expressions);
 
             var exprs = expressions.ToReadOnlyList();
             if(exprs.Count < 2) throw new ArgumentException("need at least 2 expressions", nameof(expressions));

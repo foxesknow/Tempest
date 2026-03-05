@@ -28,7 +28,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression MakeTuple(IEnumerable<Expression> values)
         {
-            if(values == null) throw new ArgumentNullException(nameof(values));
+            ArgumentNullException.ThrowIfNull(values);
 
             var tupleValues = values.ToReadOnlyList();
             if(tupleValues.Count == 0) throw new ArgumentException("need at least one value", nameof(values));

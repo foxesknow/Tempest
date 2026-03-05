@@ -32,8 +32,8 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression Lock(Expression lockObject, Expression body)
         {
-            if(lockObject == null) throw new ArgumentNullException(nameof(lockObject)); 
-            if(body == null) throw new ArgumentNullException(nameof(body)); 
+            ArgumentNullException.ThrowIfNull(lockObject);
+            ArgumentNullException.ThrowIfNull(body);
 
             if(lockObject.Type.IsValueType) throw new ArgumentException("cannot lock on a value type", nameof(lockObject));
 

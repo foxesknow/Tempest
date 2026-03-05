@@ -27,9 +27,9 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression Repeat(Expression count, LoopBodyBuilder bodyBuilder)
         {
-            if(count == null) throw new ArgumentNullException(nameof(count));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
-        
+            ArgumentNullException.ThrowIfNull(count);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
+
             var repeat = MakeLabel("repeat");
 
             if(count.Type.IsIntegral() == false)

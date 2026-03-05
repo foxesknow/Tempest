@@ -27,8 +27,8 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression DoWhile(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(predicate);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             var (@break, @continue) = MakeBreakAndContinueLabels();
 

@@ -18,7 +18,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression DiscardResult(Expression expression)
         {
-            if(expression == null) throw new ArgumentNullException(nameof(expression));
+            ArgumentNullException.ThrowIfNull(expression);
 
             if(expression.Type == typeof(void)) return expression;
 

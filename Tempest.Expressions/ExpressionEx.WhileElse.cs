@@ -32,7 +32,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression WhileElse(Expression predicate, LoopBodyBuilder whileBodyBuilder, Expression elseBody)
         {
-            if(elseBody == null) throw new ArgumentNullException(nameof(elseBody));
+            ArgumentNullException.ThrowIfNull(elseBody);
 
             /*
              * This construct has the general form

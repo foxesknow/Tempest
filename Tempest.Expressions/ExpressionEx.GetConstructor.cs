@@ -20,7 +20,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static ConstructorInfo GetConstructor<T>(Expression<Func<T>> @delegate)
         {
-            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+            ArgumentNullException.ThrowIfNull(@delegate);
 
             if(@delegate is LambdaExpression lambda && lambda.Body is NewExpression callNew && callNew.Constructor is ConstructorInfo constructor)
             {
