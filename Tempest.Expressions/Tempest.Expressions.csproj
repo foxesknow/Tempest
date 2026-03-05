@@ -1,18 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Nullable>enable</Nullable>
-        <LangVersion>Latest</LangVersion>
-		<TargetFrameworks>net6.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
-
-		<Title>Tempest.Expressions</Title>
-		<Description>Expression builders for creating common language constructs</Description>
-		<RepositoryUrl>https://github.com/foxesknow/Tempest</RepositoryUrl>
-		<PackageReadmeFile></PackageReadmeFile>
-		<PackageTags>Expressions Language C#</PackageTags>
-		<PackageProjectUrl>https://github.com/foxesknow/Tempest</PackageProjectUrl>
-		<PackageIcon>Logo.jpg</PackageIcon>
-		<Version>0.6.0</Version>
+      <Nullable>enable</Nullable>
+			<Title>Tempest.Expressions</Title>
+			<Description>Expression builders for creating common language constructs</Description>
+			<RepositoryUrl>https://github.com/foxesknow/Tempest</RepositoryUrl>
+			<PackageReadmeFile></PackageReadmeFile>
+			<PackageTags>Expressions Language C#</PackageTags>
+			<PackageProjectUrl>https://github.com/foxesknow/Tempest</PackageProjectUrl>
+			<PackageIcon>Logo.jpg</PackageIcon>
+			<Version>0.6.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">

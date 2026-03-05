@@ -12,9 +12,6 @@ namespace Tempest.Language
         public TokenizationException() { }
         public TokenizationException(string message) : base(message) { }
         public TokenizationException(string message, Exception inner) : base(message, inner) { }
-        protected TokenizationException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 
         public int LineNumber{get; init;}
     }

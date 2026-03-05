@@ -12,8 +12,5 @@ namespace Tempest.Language
         public LanguageException() { }
         public LanguageException(string message) : base(message) { }
         public LanguageException(string message, Exception inner) : base(message, inner) { }
-        protected LanguageException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }

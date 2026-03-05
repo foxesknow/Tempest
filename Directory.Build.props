@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup>
 		<LangVersion>10.0</LangVersion>
-		<TargetFrameworks>net6.0</TargetFrameworks>
+		<TargetFrameworks>net10.0</TargetFrameworks>
 		<WarningsAsErrors>true</WarningsAsErrors>
 
 		<Version>0.5.0</Version>
