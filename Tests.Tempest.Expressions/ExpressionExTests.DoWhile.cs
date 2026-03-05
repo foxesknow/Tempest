@@ -16,7 +16,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void DoWhile()
         {
-            var body = Expression.Let(ExpressionEx.Variable<int>("counter"), ExpressionEx.Constants.Int.Int_0, counter =>
+            var body = Expression.Let(Expression.Variable<int>("counter"), Expression.ZeroInt32, counter =>
             {
                 var predicate = Expression.LessThan(counter, Expression.Constant(10));
 
@@ -45,7 +45,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void DoWhile_LoopsOnce()
         {
-            var body = Expression.Let(ExpressionEx.Variable<int>("counter"), ExpressionEx.Constants.Int.Int_0, counter =>
+            var body = Expression.Let(Expression.Variable<int>("counter"), Expression.ZeroInt32, counter =>
             {
                 var predicate = Expression.LessThan(counter, Expression.Constant(0));
 

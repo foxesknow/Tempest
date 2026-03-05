@@ -28,13 +28,13 @@ namespace Tests.Tempest.Expressions
              * 
              * 
              */
-            var block = Expression.Let(ExpressionEx.Parameter<int>(), ExpressionEx.Constants.Int.Int_0, p =>
+            var block = Expression.Let(Expression.Parameter<int>(), Expression.ZeroInt32, p =>
             {
                 return Expression.Block
                 (
                     Expression.WhileElse
                     (
-                        ExpressionEx.Constants.Bool.False,
+                        Expression.False,
                         (b, c) => Expression.Assign(p, Expression.Constant(99)),
                         Expression.Assign(p, Expression.Constant(100))
                     ),
@@ -65,13 +65,13 @@ namespace Tests.Tempest.Expressions
              * 
              * 
              */
-            var block = Expression.Let(ExpressionEx.Parameter<int>(), ExpressionEx.Constants.Int.Int_0, p =>
+            var block = Expression.Let(Expression.Parameter<int>(), Expression.ZeroInt32, p =>
             {
                 return Expression.Block
                 (
                     Expression.WhileElse
                     (
-                        ExpressionEx.Constants.Bool.True,
+                        Expression.True,
                         (b, c) => Expression.Block
                         (
                             Expression.Assign(p, Expression.Constant(99)),

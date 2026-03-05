@@ -16,12 +16,12 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void IfThen()
         {
-            var p = ExpressionEx.Parameter<int>("p");
+            var p = Expression.Parameter<int>("p");
 
             var @return = Expression.Label(typeof(string));
             var body = Expression.Block
             (
-                ExpressionEx.IfThen
+                Expression.IfThen
                 (
                     new[]
                     {
@@ -47,12 +47,12 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void IfThenElse()
         {
-            var p = ExpressionEx.Parameter<int>("p");
+            var p = Expression.Parameter<int>("p");
 
             var @return = Expression.Label(typeof(string));
             var body = Expression.Block
             (
-                ExpressionEx.IfThenElse
+                Expression.IfThenElse
                 (
                     new[]
                     {

@@ -55,7 +55,7 @@ public partial class ExpressionEx
                 bodyBuilder(usingVariable),
                 Expression.IfThen
                 (
-                    Expression.ReferenceNotEqual(usingVariable, Constants.Null(@using.Type)),
+                    Expression.ReferenceNotEqual(usingVariable, Expression.Null(@using.Type)),
                     Expression.Call(Convert<IDisposable>(usingVariable), s_DisposableDispose)
                 )
             );

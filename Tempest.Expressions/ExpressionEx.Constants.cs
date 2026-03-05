@@ -5,110 +5,79 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    private static readonly Expression s_VoidExpression = Expression.Default(typeof(void));
+
+    private static readonly ConstantExpression s_TrueExpression = Expression.Constant(true, typeof(bool));
+            
+    private static readonly ConstantExpression s_FalseExpression = Expression.Constant(false, typeof(bool));
+
+    private static readonly ConstantExpression s_ZeroInt32 = Expression.Constant(0, typeof(int));
+
+    private static class NullForFactory<T> where T : class
+    {
+        public static readonly ConstantExpression Value = Expression.Constant(null, typeof(T));
+    }
+
+    extension(Expression)
     {
         /// <summary>
-        /// Pre defined constants
+        /// A void expression
         /// </summary>
-        public static class Constants
+        public static Expression Void => s_VoidExpression;
+        
+        /// <summary>
+        /// An expression that evaluates to true
+        /// </summary>
+        public static ConstantExpression True => s_TrueExpression;
+        
+
+        /// <summary>
+        /// An expression that evaluates to false
+        /// </summary>
+        public static ConstantExpression False => s_FalseExpression;
+        
+        /// <summary>
+        /// An expression that evalues to int(0)
+        /// </summary>
+        public static ConstantExpression ZeroInt32 => s_ZeroInt32;
+
+        /// <summary>
+        /// Returns the default value for a given type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static DefaultExpression Default<T>()
         {
-            /// <summary>
-            /// A void expression
-            /// </summary>
-            public static readonly Expression Void = Expression.Default(typeof(void));
+            return Expression.Default(typeof(T));
+        }   
 
-            /// <summary>
-            /// Boolean constants
-            /// </summary>
-            public static class Bool
-            {
-                /// <summary>
-                /// A true constant expression
-                /// </summary>
-                public static readonly Expression True = Expression.Constant(true, typeof(bool));
-                
-                /// <summary>
-                /// A false constant expression
-                /// </summary>
-                public static readonly Expression False = Expression.Constant(false, typeof(bool));
-            }
-
-            /// <summary>
-            /// Useful integer constants
-            /// </summary>
-            public static class Int
-            {
-                /// <summary>
-                /// Zero as a constant
-                /// </summary>
-                public static readonly Expression Int_0 = Expression.Constant(0, typeof(int));
-            }
-
-            /// <summary>
-            /// Returns the zero constant for a type, if applicable
-            /// </summary>
-            /// <param name="type"></param>
-            /// <returns></returns>
-            /// <exception cref="ArgumentNullException"></exception>
-            /// <exception cref="ArgumentException"></exception>
-            public static ConstantExpression ZeroFor(Type type)
-            {
-                if(type == null) throw new ArgumentNullException(nameof(type));
-
-                if(type == typeof(byte)) return DefaultFor<byte>();
-                if(type == typeof(sbyte)) return DefaultFor<sbyte>();
-                if(type == typeof(short)) return DefaultFor<short>();
-                if(type == typeof(ushort)) return DefaultFor<ushort>();
-                if(type == typeof(int)) return DefaultFor<int>();
-                if(type == typeof(uint)) return DefaultFor<uint>();
-                if(type == typeof(long)) return DefaultFor<long>();
-                if(type == typeof(ulong)) return DefaultFor<ulong>();
-                if(type == typeof(float)) return DefaultFor<float>();
-                if(type == typeof(double)) return DefaultFor<double>();
-                if(type == typeof(char)) return DefaultFor<char>();
-
-                throw new ArgumentException($"zero not available for {type.Name}", nameof(type));
-            }
-
-            /// <summary>
-            /// Returns the null value for a given reference type
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <returns></returns>
-            public static ConstantExpression Null<T>() where T : class
-            {
-                return DefaultForFactory<T>.Value;
-            }
-
-            /// <summary>
-            /// Returns the null value for a given reference type
-            /// </summary>
-            /// <param name="type"></param>
-            /// <returns></returns>
-            public static ConstantExpression Null(Type type)
-            {
-                if(type == null) throw new ArgumentNullException(nameof(type));
-                if(type.IsValueType) throw new ArgumentException("type is a value type", nameof(type));
-
-                return Expression.Constant(null, type);
-            }
-
-            /// <summary>
-            /// Returns the default value for a given type
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <returns></returns>
-            public static ConstantExpression DefaultFor<T>()
-            {
-                return DefaultForFactory<T>.Value;
-            }
-
-            static class DefaultForFactory<T>
-            {
-                public static readonly ConstantExpression Value = Expression.Constant(default(T), typeof(T));
-            }
+        /// <summary>
+        /// Returns the null value for a given reference type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static ConstantExpression Null<T>() where T : class
+        {
+            return NullForFactory<T>.Value;
         }
+
+        /// <summary>
+        /// Returns the null value for a given reference type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static ConstantExpression Null(Type type)
+        {
+            if(type == null) throw new ArgumentNullException(nameof(type));
+            if(type.IsValueType) throw new ArgumentException("type is a value type", nameof(type));
+
+            return Expression.Constant(null, type);
+        }
+
+             
     }
 }

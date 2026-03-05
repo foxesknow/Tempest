@@ -16,7 +16,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_1()
         {
-            var counter = ExpressionEx.Variable<int>("a");
+            var counter = Expression.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => Expression.PreIncrementAssign(counter));
@@ -38,7 +38,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_2()
         {
-            var counter = ExpressionEx.Variable<int>("a");
+            var counter = Expression.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => 
@@ -67,7 +67,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_Byte_counter()
         {
-            var counter = ExpressionEx.Variable<int>("a");
+            var counter = Expression.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = Expression.Repeat(Expression.Constant((byte)5), (b, c) => Expression.PreIncrementAssign(counter));
@@ -89,7 +89,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_break()
         {
-            var counter = ExpressionEx.Variable<int>("a");
+            var counter = Expression.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => 
@@ -122,7 +122,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Repeat_continue()
         {
-            var counter = ExpressionEx.Variable<int>("a");
+            var counter = Expression.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
             var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => 

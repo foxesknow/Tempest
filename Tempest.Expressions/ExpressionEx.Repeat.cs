@@ -45,7 +45,7 @@ public static partial class ExpressionEx
             };
 
             var counter = Expression.Variable(counterType, "repeatCount");
-            var counterInitializer = Expression.Assign(counter, Constants.ZeroFor(counterType));
+            var counterInitializer = Expression.Assign(counter, Expression.Default(counterType));
 
             var stop = Expression.Variable(counterType, "stop");
             var stopInitializer = Expression.Assign(stop, ConvertIfNecessary(count, counterType));

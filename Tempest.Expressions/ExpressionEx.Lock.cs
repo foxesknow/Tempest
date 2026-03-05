@@ -39,7 +39,7 @@ public static partial class ExpressionEx
 
             var block = Let(Variable<object>("lock"), lockObject, @lock =>
             {
-                return Let(Variable<bool>("lockTaken"), Constants.Bool.False, lockTaken =>
+                return Let(Variable<bool>("lockTaken"), Expression.False, lockTaken =>
                 {
                     return Expression.TryFinally
                     (

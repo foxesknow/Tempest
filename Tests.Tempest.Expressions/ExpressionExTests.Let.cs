@@ -33,11 +33,11 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Let_To_The_Power_4()
         {
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
             var lambda = Expression.Lambda<Func<int, int>>
             (
-                ExpressionEx.Let(Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
+                Expression.Let(Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
                 p
             );
 

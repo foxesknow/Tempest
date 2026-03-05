@@ -16,10 +16,10 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Condition()
         {
-            var p = ExpressionEx.Parameter<int>("p");
+            var p = Expression.Parameter<int>("p");
 
             var @return = Expression.Label(typeof(string));
-            var body = ExpressionEx.Condition
+            var body = Expression.Condition
             (
                 new[]
                 {

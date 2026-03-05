@@ -17,7 +17,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ForEachElse()
         {
-            var parameter = ExpressionEx.Parameter<List<string>>();
+            var parameter = Expression.Parameter<List<string>>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
             var writeLine = Expression.GetMethod(consoleWriteLine);
@@ -39,7 +39,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ForEachElse_Break()
         {
-            var parameter = ExpressionEx.Parameter<List<string>>();
+            var parameter = Expression.Parameter<List<string>>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
             var writeLine = Expression.GetMethod(consoleWriteLine);

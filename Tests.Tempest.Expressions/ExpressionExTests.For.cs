@@ -28,7 +28,7 @@ namespace Tests.Tempest.Expressions
              *     return p;
              * }
              */
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
             var body = Expression.Let(Expression.Constant(0), i =>
             {
@@ -67,7 +67,7 @@ namespace Tests.Tempest.Expressions
              *     return p;
              * }
              */
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
             var body = Expression.Let(Expression.Constant(0), i =>
             {
@@ -111,7 +111,7 @@ namespace Tests.Tempest.Expressions
              *     return p;
              * }
              */
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
             var body = Expression.Let(Expression.Constant(0), i =>
             {

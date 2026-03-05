@@ -49,7 +49,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression IfThen(IEnumerable<(Expression Test, Expression Body)> conditions)
         {
-            return IfThenElse(conditions, Constants.Void);
+            return IfThenElse(conditions, Expression.Void);
         }
 
         /// <summary>

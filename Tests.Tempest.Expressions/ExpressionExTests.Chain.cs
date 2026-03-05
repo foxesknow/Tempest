@@ -16,7 +16,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Chain_Conditionals()
         {
-            var p1 = ExpressionEx.Parameter<User>();
+            var p1 = Expression.Parameter<User>();
             var getName = Expression.GetProperty((User user) => user.Name);
             var stringToString = Expression.GetMethod((string s) => s.ToString());
             var getLength = Expression.GetProperty((string s) => s.Length);
@@ -50,20 +50,19 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Chain_ToVoid()
         {
-            var p1 = ExpressionEx.Parameter<List<int>>();
-            var getRange = ExpressionEx.GetMethod((List<int> list) => list.GetRange(0, 1));
-            var clear = ExpressionEx.GetMethod((List<int> list) => list.Clear());
+            var p1 = Expression.Parameter<List<int>>();
+            var getRange = Expression.GetMethod((List<int> list) => list.GetRange(0, 1));
+            var clear = Expression.GetMethod((List<int> list) => list.Clear());
 
             /*
              * For a List<int>, list, this is:
              * 
              *   list.GetRange(..)?.Clear()
              */
-            var chain = ExpressionEx.Chain
+            var chain = p1.Chain
             (
-                p1,
-                expr => ExpressionEx.ConditionalCall(expr, getRange, Expression.Constant(0), Expression.Constant(3)),
-                expr => ExpressionEx.ConditionalCall(expr, clear)
+                expr => expr.ConditionalCall(getRange, Expression.Constant(0), Expression.Constant(3)),
+                expr => expr.ConditionalCall(clear)
             );
 
             var numbers = new List<int>{1, 1, 2, 3, 5, 8};
@@ -80,14 +79,13 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Chain_CallThenProperty()
         {
-            var ctor = ExpressionEx.GetConstructor(() => new List<int>());
-            var getRange = ExpressionEx.GetMethod((List<int> list) => list.GetRange(0, 1));
-            var getCount = ExpressionEx.GetProperty((List<int> list) => list.Count);
+            var ctor = Expression.GetConstructor(() => new List<int>());
+            var getRange = Expression.GetMethod((List<int> list) => list.GetRange(0, 1));
+            var getCount = Expression.GetProperty((List<int> list) => list.Count);
 
-            var p1 = ExpressionEx.Parameter<List<int>>();
-            var body = ExpressionEx.Chain
+            var p1 = Expression.Parameter<List<int>>();
+            var body = p1.Chain
             (
-                p1,
                 expr => Expression.Call(expr, getRange, Expression.Constant(0), Expression.Constant(3)),
                 expr => Expression.Property(expr, getCount)
             );

@@ -34,7 +34,7 @@ public static partial class ExpressionEx
             var returnType = method.ReturnType;
             var defaultValue = returnType.IsValueType switch
             {
-                true => (returnType == typeof(void) ? Constants.Void : Expression.Default(typeof(Nullable<>).MakeGenericType(returnType))),
+                true => (returnType == typeof(void) ? Expression.Void : Expression.Default(typeof(Nullable<>).MakeGenericType(returnType))),
                 false => Expression.Default(method.ReturnType)
             };
 
@@ -59,7 +59,7 @@ public static partial class ExpressionEx
                     // NOTE: Don't use "NotEqual" as it will use any operator!= overloads, which we don't want
                     return Expression.Condition
                     (
-                        Expression.ReferenceNotEqual(target, Constants.Null(instance.Type)),
+                        Expression.ReferenceNotEqual(target, Expression.Null(instance.Type)),
                         ConvertIfNecessary(Expression.Call(target, method, arguments), defaultValue.Type),
                         defaultValue                        
                     );

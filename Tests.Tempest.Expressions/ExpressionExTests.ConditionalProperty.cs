@@ -16,8 +16,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ConditionalProperty_ObjectToValue()
         {
-            var p1 = ExpressionEx.Parameter<List<int>>();
-            var property = ExpressionEx.GetProperty((List<int> list) => list.Count);
+            var p1 = Expression.Parameter<List<int>>();
+            var property = Expression.GetProperty((List<int> list) => list.Count);
 
             var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<List<int>, int?>>(call, p1);
@@ -33,8 +33,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ConditionalProperty_ObjectToValue_Null()
         {
-            var p1 = ExpressionEx.Parameter<List<int>>();
-            var property = ExpressionEx.GetProperty((List<int> list) => list.Count);
+            var p1 = Expression.Parameter<List<int>>();
+            var property = Expression.GetProperty((List<int> list) => list.Count);
 
             var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<List<int>, int?>>(call, p1);
@@ -48,8 +48,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ConditionalProperty_ObjectToObject()
         {
-            var p1 = ExpressionEx.Parameter<User>();
-            var property = ExpressionEx.GetProperty((User user) => user.Name);
+            var p1 = Expression.Parameter<User>();
+            var property = Expression.GetProperty((User user) => user.Name);
 
             var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<User, string>>(call, p1);
@@ -66,8 +66,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ConditionalProperty_ObjectToObject_Null()
         {
-            var p1 = ExpressionEx.Parameter<User>();
-            var property = ExpressionEx.GetProperty((User user) => user.Name);
+            var p1 = Expression.Parameter<User>();
+            var property = Expression.GetProperty((User user) => user.Name);
 
             var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<User, string>>(call, p1);
@@ -81,10 +81,10 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Conditional_Calls_Properties()
         {
-            var p1 = ExpressionEx.Parameter<User>();
-            var getName = ExpressionEx.GetProperty((User user) => user.Name);
-            var toString = ExpressionEx.GetMethod((string s) => s.ToString());
-            var getLength = ExpressionEx.GetProperty((string s) => s.Length);
+            var p1 = Expression.Parameter<User>();
+            var getName = Expression.GetProperty((User user) => user.Name);
+            var toString = Expression.GetMethod((string s) => s.ToString());
+            var getLength = Expression.GetProperty((string s) => s.Length);
 
             var chain = p1.ConditionalProperty(getName).ConditionalCall(toString).ConditionalProperty(getLength);
 

@@ -17,7 +17,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ForEach()
         {
-            var parameter = ExpressionEx.Parameter<List<string>>();
+            var parameter = Expression.Parameter<List<string>>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
             var writeLine = Expression.GetMethod(consoleWriteLine);
@@ -38,7 +38,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ForEach_Pattern()
         {
-            var parameter = ExpressionEx.Parameter<CustomSequence>();
+            var parameter = Expression.Parameter<CustomSequence>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine(1);
             var writeLine = Expression.GetMethod(consoleWriteLine);
@@ -60,7 +60,7 @@ namespace Tests.Tempest.Expressions
         public void ForEach_Explicit()
         {
             // GetEnumerator won't be visible on the type so we should use IEnumerable<>
-            var parameter = ExpressionEx.Parameter<CustomSequence_Explicit>();
+            var parameter = Expression.Parameter<CustomSequence_Explicit>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine(1);
             var writeLine = Expression.GetMethod(consoleWriteLine);
@@ -82,7 +82,7 @@ namespace Tests.Tempest.Expressions
         public void ForEach_Disposable()
         {
             // GetEnumerator won't be visible on the type so we should use IEnumerable<>
-            var parameter = ExpressionEx.Parameter<CustomSequence_Disposable>();
+            var parameter = Expression.Parameter<CustomSequence_Disposable>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine(1);
             var writeLine = Expression.GetMethod(consoleWriteLine);

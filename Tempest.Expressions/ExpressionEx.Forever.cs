@@ -28,7 +28,7 @@ public static partial class ExpressionEx
         /// <returns></returns>
         public static Expression Forever(LoopBodyBuilder bodyBuilder)
         {
-            return While(Constants.Bool.True, bodyBuilder);
+            return While(Expression.True, bodyBuilder);
         }
     }
 }

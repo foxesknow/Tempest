@@ -25,7 +25,7 @@ public static partial class ExpressionEx
             return Expression.Block
             (
                 expression,
-                Constants.Void
+                Expression.Void
             );
         }
     }
