@@ -7,9 +7,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Collections;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Generates a for loop.
@@ -20,9 +22,9 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression For(Expression predicate, Expression iteration, LoopBodyBuilder bodyBuilder)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if(iteration == null) throw new ArgumentNullException(nameof(iteration));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(predicate);
+            ArgumentNullException.ThrowIfNull(iteration);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             /*
              * The loop has the form:

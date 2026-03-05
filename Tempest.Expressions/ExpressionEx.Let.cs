@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Generates a let binding ala F#
@@ -23,9 +25,9 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression Let(ParameterExpression name, Expression expression, LetBuilder @in)
         {
-            if(name == null) throw new ArgumentNullException(nameof(name));
-            if(expression == null) throw new ArgumentNullException(nameof(expression));
-            if(@in == null) throw new ArgumentNullException(nameof(@in));
+            ArgumentNullException.ThrowIfNull(name);
+            ArgumentNullException.ThrowIfNull(expression);
+            ArgumentNullException.ThrowIfNull(@in);
 
             var block = Expression.Block
             (

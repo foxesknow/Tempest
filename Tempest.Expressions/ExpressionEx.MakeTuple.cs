@@ -5,9 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Create a tuple holding the specified values
@@ -26,14 +28,14 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression MakeTuple(IEnumerable<Expression> values)
         {
-            if(values == null) throw new ArgumentNullException(nameof(values));
+            ArgumentNullException.ThrowIfNull(values);
 
             var tupleValues = values.ToReadOnlyList();
             if(tupleValues.Count == 0) throw new ArgumentException("need at least one value", nameof(values));
 
             var stack = new Stack<List<Expression>>();
             List<Expression>? currentValues = null;
-            
+        
             for(int i = 0; i < tupleValues.Count; i++)
             {
                 var expression = tupleValues[i];

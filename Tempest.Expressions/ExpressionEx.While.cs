@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
-{
-    public static partial class ExpressionEx
-    {
-        /// <summary>
-        /// A delegate that creates a while loop
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <param name="bodyBuilder"></param>
-        /// <returns></returns>
-        private delegate Expression WhileBuilder(Expression predicate, LoopBodyBuilder bodyBuilder);
+namespace Tempest.Expressions;
 
+public static partial class ExpressionEx
+{
+    /// <summary>
+    /// A delegate that creates a while loop
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <param name="bodyBuilder"></param>
+    /// <returns></returns>
+    private delegate Expression WhileBuilder(Expression predicate, LoopBodyBuilder bodyBuilder);
+    
+    extension(Expression)
+    {
         /// <summary>
         /// Generates a while loop
         /// </summary>
@@ -56,8 +58,8 @@ namespace Tempest.Expressions
 
         private static Expression WhileImpl(Expression predicate, LoopBodyBuilder bodyBuilder, Expression? elseBody)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(predicate);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             var (@break, @continue) = MakeBreakAndContinueLabels();
 

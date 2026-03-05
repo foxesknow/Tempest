@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Generates an expression that will execute a body of conde until the predicate is false
@@ -19,7 +21,7 @@ namespace Tempest.Expressions
         /// <exception cref="ArgumentException"></exception>
         public static Expression Until(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
+            ArgumentNullException.ThrowIfNull(predicate);
             if(predicate.Type != typeof(bool)) throw new ArgumentException("predicate is not a boolean", nameof(predicate));
 
             var negatedPredicate = Expression.Not(predicate);

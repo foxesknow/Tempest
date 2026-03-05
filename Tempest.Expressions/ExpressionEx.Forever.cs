@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Creates an expresson that runs forever, or until something breaks out of the loop
@@ -26,7 +28,7 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression Forever(LoopBodyBuilder bodyBuilder)
         {
-            return While(Constants.Bool.True, bodyBuilder);
+            return While(Expression.True, bodyBuilder);
         }
     }
 }

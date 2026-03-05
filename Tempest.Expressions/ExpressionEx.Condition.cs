@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
-        /// Creates an expression tat evaluates a series of tests, executing the body for the first test that evaluates to true.
+        /// Creates an expression that evaluates a series of tests, executing the body for the first test that evaluates to true.
         /// If not evalutes to true then the default expression is used.
         /// 
         /// This is similar to a switch expression
@@ -24,8 +26,8 @@ namespace Tempest.Expressions
         /// <exception cref="ArgumentException"></exception>
         public static Expression Condition(IEnumerable<(Expression Test, Expression Body)> conditions, Expression @default)
         {
-            if(conditions == null) throw new ArgumentNullException(nameof(conditions));
-            if(@default == null) throw new ArgumentNullException(nameof(@default));
+            ArgumentNullException.ThrowIfNull(conditions);
+            ArgumentNullException.ThrowIfNull(@default);
 
             var conds = conditions.ToReadOnlyList();
             if(conds.Count == 0) throw new ArgumentException("no conditions", nameof(conditions));

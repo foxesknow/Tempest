@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Makes a tuple consisting of a test and the expression to execute if the test is true
@@ -47,7 +49,7 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression IfThen(IEnumerable<(Expression Test, Expression Body)> conditions)
         {
-            return IfThenElse(conditions, Constants.Void);
+            return IfThenElse(conditions, Expression.Void);
         }
 
         /// <summary>
@@ -78,8 +80,8 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression IfThenElse(IEnumerable<(Expression Test, Expression Body)> conditions, Expression @default)
         {
-            if(conditions == null) throw new ArgumentNullException(nameof(conditions));
-            if(@default == null) throw new ArgumentNullException(nameof(@default));
+            ArgumentNullException.ThrowIfNull(conditions);
+            ArgumentNullException.ThrowIfNull(@default);
 
             var conds = conditions.ToReadOnlyList();
             if(conds.Count == 0) throw new ArgumentException("no conditions", nameof(conditions));

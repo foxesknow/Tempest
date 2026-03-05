@@ -14,21 +14,21 @@ namespace Tests.Tempest.Expressions
         [TestCase]
         public void GetProperty_Static()
         {
-            var property = ExpressionEx.GetProperty(() => Console.WindowHeight);
+            var property = Expression.GetProperty(() => Console.WindowHeight);
             Assert.That(property, Is.Not.Null);
         }
 
         [TestCase]
         public void GetProperty_Instance()
         {
-            var property = ExpressionEx.GetProperty((List<int> list) => list.Count);
+            var property = Expression.GetProperty((List<int> list) => list.Count);
             Assert.That(property, Is.Not.Null);
         }
 
         [TestCase]
         public void GetProperty_Method()
         {
-            Assert.Catch(() => ExpressionEx.GetProperty(() => Console.ReadLine()));
+            Assert.Catch(() => Expression.GetProperty(() => Console.ReadLine()));
         }
     }
 }

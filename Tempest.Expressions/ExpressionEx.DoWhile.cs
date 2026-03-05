@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Generates a do-while loop
@@ -25,8 +27,8 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression DoWhile(Expression predicate, LoopBodyBuilder bodyBuilder)
         {
-            if(predicate == null) throw new ArgumentNullException(nameof(predicate));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(predicate);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             var (@break, @continue) = MakeBreakAndContinueLabels();
 

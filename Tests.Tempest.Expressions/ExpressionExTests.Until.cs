@@ -24,13 +24,13 @@ namespace Tests.Tempest.Expressions
              *    ++count;
              * }
              */
-            var body = ExpressionEx.Let(ExpressionEx.Constants.Int.Int_0, i =>
+            var body = Expression.Let(Expression.ZeroInt32, i =>
             {
-                return ExpressionEx.Let(ExpressionEx.Constants.Int.Int_0, count =>
+                return Expression.Let(Expression.ZeroInt32, count =>
                 {
                     return Expression.Block
                     (
-                        ExpressionEx.Until(Expression.Equal(i, Expression.Constant(10)), (b, c) =>
+                        Expression.Until(Expression.Equal(i, Expression.Constant(10)), (b, c) =>
                         {
                             return Expression.Block
                             (

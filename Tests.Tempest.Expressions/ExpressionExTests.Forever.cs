@@ -16,8 +16,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Forever()
         {
-            var variable = ExpressionEx.Variable<int>("counter");
-            var forever = ExpressionEx.Forever((b, c) =>
+            var variable = Expression.Variable<int>("counter");
+            var forever = Expression.Forever((b, c) =>
             {
                 return Expression.PostIncrementAssign(variable);
             });

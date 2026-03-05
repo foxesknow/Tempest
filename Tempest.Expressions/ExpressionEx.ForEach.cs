@@ -8,9 +8,11 @@ using System.Reflection;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public partial class ExpressionEx
 {
-    public partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Creates a foreach expression that enumerates over a sequence
@@ -28,8 +30,8 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression ForEach(Expression sequence, LetLoopBodyBuilder bodyBuilder)
         {
-            if(sequence == null) throw new ArgumentNullException(nameof(sequence));
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
+            ArgumentNullException.ThrowIfNull(sequence);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             var whileBuilder = MakeWhileBuilder(null);
 

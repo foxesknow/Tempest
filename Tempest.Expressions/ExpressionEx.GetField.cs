@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Extracts the FieldInfo from a lamda representing a field access.
@@ -37,7 +39,7 @@ namespace Tempest.Expressions
 
         private static FieldInfo DoGetField<T>(Expression<T> @delegate) where T : Delegate
         {
-            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+            ArgumentNullException.ThrowIfNull(@delegate);
 
             if(@delegate is LambdaExpression lambda && lambda.Body is MemberExpression member && member.Member is FieldInfo field)
             {

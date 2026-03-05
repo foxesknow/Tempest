@@ -16,9 +16,9 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Defer()
         {
-            var consoleWriteLine = ExpressionEx.GetMethod(() => Console.WriteLine((string)null));
+            var consoleWriteLine = Expression.GetMethod(() => Console.WriteLine((string)null));
 
-            var body = ExpressionEx.Defer
+            var body = Expression.Defer
             (
                 Expression.Call(null, consoleWriteLine, Expression.Constant("Last")),
                 Expression.Block

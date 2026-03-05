@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+/// <summary>
+/// Useful expression methods
+/// </summary>
+public static partial class ExpressionEx
 {
-    /// <summary>
-    /// Useful expression methods
-    /// </summary>
-    public static partial class ExpressionEx
+    extension(Expression instance)
     {
         /// <summary>
         /// Applies a series of expression to an instance, returning the instance
@@ -28,10 +30,9 @@ namespace Tempest.Expressions
         /// }
         /// </code>
         /// </example>
-        /// <param name="instance"></param>
         /// <param name="functions"></param>
         /// <returns></returns>
-        public static Expression Against(Expression instance, params Func<Expression, Expression>[] functions)
+        public Expression Against(params Func<Expression, Expression>[] functions)
         {
             return Against(instance, (IEnumerable<Func<Expression, Expression>>)functions);
         }
@@ -51,13 +52,11 @@ namespace Tempest.Expressions
         /// }
         /// </code>
         /// </example>
-        /// <param name="instance"></param>
         /// <param name="functions"></param>
         /// <returns></returns>
-        public static Expression Against(Expression instance, IEnumerable<Func<Expression, Expression>> functions)
+        public Expression Against(IEnumerable<Func<Expression, Expression>> functions)
         {
-            if(instance == null) throw new ArgumentNullException(nameof(instance));
-            if(functions == null) throw new ArgumentNullException(nameof(functions));
+            ArgumentNullException.ThrowIfNull(functions);
 
             var funcs = functions.ToReadOnlyList();
             if(funcs.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(functions));

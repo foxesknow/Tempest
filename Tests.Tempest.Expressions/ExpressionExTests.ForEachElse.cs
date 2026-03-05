@@ -17,12 +17,12 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ForEachElse()
         {
-            var parameter = ExpressionEx.Parameter<List<string>>();
+            var parameter = Expression.Parameter<List<string>>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
-            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+            var writeLine = Expression.GetMethod(consoleWriteLine);
 
-            var body = ExpressionEx.ForEachElse
+            var body = Expression.ForEachElse
             (
                 parameter,
                 (v, b, c) => Expression.Call(null, writeLine, v),
@@ -39,12 +39,12 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void ForEachElse_Break()
         {
-            var parameter = ExpressionEx.Parameter<List<string>>();
+            var parameter = Expression.Parameter<List<string>>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
-            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+            var writeLine = Expression.GetMethod(consoleWriteLine);
 
-            var body = ExpressionEx.ForEachElse
+            var body = Expression.ForEachElse
             (
                 parameter,
                 (v, b, c) => Expression.Block

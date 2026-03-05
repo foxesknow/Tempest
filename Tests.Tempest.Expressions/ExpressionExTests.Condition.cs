@@ -16,17 +16,17 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Condition()
         {
-            var p = ExpressionEx.Parameter<int>("p");
+            var p = Expression.Parameter<int>("p");
 
             var @return = Expression.Label(typeof(string));
-            var body = ExpressionEx.Condition
+            var body = Expression.Condition
             (
                 new[]
                 {
-                    ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(0)), Expression.Constant("zero")),
-                    ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(1)), Expression.Constant("one")),
-                    ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(2)), Expression.Constant("two")),
-                    ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(3)), Expression.Constant("three")),
+                    Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(0)), Expression.Constant("zero")),
+                    Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(1)), Expression.Constant("one")),
+                    Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(2)), Expression.Constant("two")),
+                    Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(3)), Expression.Constant("three")),
                 },
                 Expression.Constant("nothing")
             );

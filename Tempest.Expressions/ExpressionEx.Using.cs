@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Tempest.Expressions
-{
-    public partial class ExpressionEx
-    {
-        private static readonly MethodInfo s_DisposableDispose = GetMethod((IDisposable d) => d.Dispose());
+namespace Tempest.Expressions;
 
+public partial class ExpressionEx
+{
+    private static readonly MethodInfo s_DisposableDispose = GetMethod((IDisposable d) => d.Dispose());
+
+    extension(Expression)
+    {
         /// <summary>
         /// Generates a using block
         /// </summary>
@@ -28,8 +30,8 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression Using(Expression @using, UsingBuilder bodyBuilder)
         {
-            if(@using == null) throw new ArgumentNullException(nameof(@using)); 
-            if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder)); 
+            ArgumentNullException.ThrowIfNull(@using);
+            ArgumentNullException.ThrowIfNull(bodyBuilder);
 
             if(@using.Type.IsValueType)
             {
@@ -53,7 +55,7 @@ namespace Tempest.Expressions
                 bodyBuilder(usingVariable),
                 Expression.IfThen
                 (
-                    Expression.ReferenceNotEqual(usingVariable, Constants.Null(@using.Type)),
+                    Expression.ReferenceNotEqual(usingVariable, Expression.Null(@using.Type)),
                     Expression.Call(Convert<IDisposable>(usingVariable), s_DisposableDispose)
                 )
             );
@@ -100,7 +102,7 @@ namespace Tempest.Expressions
                     Expression.Call(usingVariable, directDisposeMethod)
                 );
             }
-            
+        
             var block = Expression.Block
             (
                 new[]{usingVariable},

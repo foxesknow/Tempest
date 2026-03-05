@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
 
-namespace Tempest.Expressions
-{
-    public static partial class ExpressionEx
-    {
-        private static readonly MethodInfo s_MonitorEnter = GetMethod(() => Monitor.Enter(null!, ref DiscardableRef<bool>.Value));
-        private static readonly MethodInfo s_MonitorExit = GetMethod(() => Monitor.Exit(null!));
+namespace Tempest.Expressions;
 
+public static partial class ExpressionEx
+{
+    private static readonly MethodInfo s_MonitorEnter = GetMethod(() => Monitor.Enter(null!, ref DiscardableRef<bool>.Value));
+    private static readonly MethodInfo s_MonitorExit = GetMethod(() => Monitor.Exit(null!));
+
+    extension(Expression)
+    {
         /// <summary>
         /// Acquires a lock and executes a body
         /// </summary>
@@ -30,14 +32,14 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression Lock(Expression lockObject, Expression body)
         {
-            if(lockObject == null) throw new ArgumentNullException(nameof(lockObject)); 
-            if(body == null) throw new ArgumentNullException(nameof(body)); 
+            ArgumentNullException.ThrowIfNull(lockObject);
+            ArgumentNullException.ThrowIfNull(body);
 
             if(lockObject.Type.IsValueType) throw new ArgumentException("cannot lock on a value type", nameof(lockObject));
 
             var block = Let(Variable<object>("lock"), lockObject, @lock =>
             {
-                return Let(Variable<bool>("lockTaken"), Constants.Bool.False, lockTaken =>
+                return Let(Variable<bool>("lockTaken"), Expression.False, lockTaken =>
                 {
                     return Expression.TryFinally
                     (

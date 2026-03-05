@@ -19,7 +19,7 @@ namespace Tests.Tempest.Expressions
             var @lock = Expression.Constant("Hello");
             var body = Expression.Constant("Goodbye");
 
-            var e = ExpressionEx.Lock(@lock, body);
+            var e = Expression.Lock(@lock, body);
             var lambda = Expression.Lambda<Func<string>>(e);
             var function = lambda.Compile();
 

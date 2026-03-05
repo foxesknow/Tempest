@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// An implementation of lhs <![CDATA[<=>]]> rhs :
@@ -26,17 +28,17 @@ namespace Tempest.Expressions
         /// <exception cref="ArgumentException"></exception>
         public static Expression Starship(Expression lhs, Expression rhs)
         {
-            if(lhs is null) throw new ArgumentNullException(nameof(lhs));
-            if(rhs is null) throw new ArgumentNullException(nameof(rhs));
+            ArgumentNullException.ThrowIfNull(lhs);
+            ArgumentNullException.ThrowIfNull(rhs);
 
             if(lhs.Type != rhs.Type) throw new ArgumentException("lhs and rhs do not have the same type");
 
             var type = lhs.Type;
             var comparerType = typeof(Comparer<>).MakeGenericType(type);
-            
+        
             var getComparer = comparerType.GetProperty("Default")!;
             var compareMethod = getComparer.PropertyType.GetMethod("Compare")!;
-            
+        
             var expression = Let(Expression.Property(null, getComparer), comparer =>
             {
                 return Expression.Call(comparer, compareMethod, lhs, rhs);

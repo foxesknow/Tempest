@@ -28,11 +28,11 @@ namespace Tests.Tempest.Expressions
              *     return p;
              * }
              */
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
-            var body = ExpressionEx.Let(Expression.Constant(0), i =>
+            var body = Expression.Let(Expression.Constant(0), i =>
             {
-                return ExpressionEx.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
+                return Expression.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
                 {
                     return Expression.AddAssign(p, Expression.Constant(100));
                 });
@@ -67,11 +67,11 @@ namespace Tests.Tempest.Expressions
              *     return p;
              * }
              */
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
-            var body = ExpressionEx.Let(Expression.Constant(0), i =>
+            var body = Expression.Let(Expression.Constant(0), i =>
             {
-                return ExpressionEx.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
+                return Expression.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
                 {
                     return Expression.IfThenElse
                     (
@@ -111,11 +111,11 @@ namespace Tests.Tempest.Expressions
              *     return p;
              * }
              */
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
-            var body = ExpressionEx.Let(Expression.Constant(0), i =>
+            var body = Expression.Let(Expression.Constant(0), i =>
             {
-                return ExpressionEx.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
+                return Expression.For(Expression.LessThan(i, Expression.Constant(5)), Expression.PostIncrementAssign(i), (b, c) =>
                 {
                     return Expression.IfThenElse
                     (

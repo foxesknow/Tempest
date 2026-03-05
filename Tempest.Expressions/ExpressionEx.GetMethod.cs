@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Extracts the MethodInfo from a lambda representing a method call.
@@ -60,7 +62,7 @@ namespace Tempest.Expressions
 
         private static MethodInfo DoGetMethod<T>(Expression<T> @delegate) where T : Delegate
         {
-            if(@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+            ArgumentNullException.ThrowIfNull(@delegate);
 
             if(@delegate is LambdaExpression lambda && lambda.Body is MethodCallExpression methodCall)
             {

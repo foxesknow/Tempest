@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Defers running an expression until after the body has been evaluates.
@@ -32,8 +34,8 @@ namespace Tempest.Expressions
         /// <returns></returns>
         public static Expression Defer(Expression defer, Expression body)
         {
-            if(defer == null) throw new ArgumentNullException(nameof(defer));
-            if(body == null) throw new ArgumentNullException(nameof(body));
+            ArgumentNullException.ThrowIfNull(defer);
+            ArgumentNullException.ThrowIfNull(body);
 
             return Expression.TryFinally(body, defer);
         }

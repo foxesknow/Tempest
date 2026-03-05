@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression instance)
     {
         /// <summary>
         /// Simplifies chaining together conditional access
@@ -18,10 +20,9 @@ namespace Tempest.Expressions
         ///     instance.Link1.Link2.LinkN
         /// </code>
         /// </example>
-        /// <param name="instance"></param>
         /// <param name="links"></param>
         /// <returns></returns>
-        public static Expression Chain(Expression instance, params Func<Expression, Expression>[] links)
+        public Expression Chain(params Func<Expression, Expression>[] links)
         {
             return Chain(instance, (IEnumerable<Func<Expression, Expression>>)links);
         }
@@ -37,10 +38,9 @@ namespace Tempest.Expressions
         /// <param name="instance"></param>
         /// <param name="links"></param>
         /// <returns></returns>
-        public static Expression Chain(Expression instance, IEnumerable<Func<Expression, Expression>> links)
+        public Expression Chain(IEnumerable<Func<Expression, Expression>> links)
         {
-            if(instance == null) throw new ArgumentNullException(nameof(instance));
-            if(links == null) throw new ArgumentNullException(nameof(links));
+            ArgumentNullException.ThrowIfNull(links);
 
             var functions = links.ToReadOnlyList();
             if(functions.Count == 0) throw new ArgumentException("need at least one conditional access", nameof(links));

@@ -21,7 +21,7 @@ namespace Tests.Tempest.Expressions
 
             var predicate = Expression.LessThan(counter, Expression.Constant(10));
 
-            var @while = ExpressionEx.While(predicate, (b, c) => 
+            var @while = Expression.While(predicate, (b, c) => 
             {
                 return Expression.Block
                 (
@@ -53,7 +53,7 @@ namespace Tests.Tempest.Expressions
 
             var predicate = Expression.LessThan(counter, Expression.Constant(0));
 
-            var @while = ExpressionEx.While(predicate, (b, c) => 
+            var @while = Expression.While(predicate, (b, c) => 
             {
                 return Expression.Block
                 (

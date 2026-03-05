@@ -9,8 +9,6 @@ using Tempest.Expressions;
 
 using NUnit.Framework;
 
-using static Tempest.Expressions.ExpressionEx;
-
 namespace Tests.Tempest.Expressions
 {
     public partial class ExpressionExTests
@@ -18,9 +16,9 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Let_Add()
         {
-            var add = Let(Expression.Constant(10), a =>
+            var add = Expression.Let(Expression.Constant(10), a =>
             {
-                return Let(Expression.Constant(20), b =>
+                return Expression.Let(Expression.Constant(20), b =>
                 {
                     return Expression.Add(a, b);
                 });
@@ -35,11 +33,11 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Let_To_The_Power_4()
         {
-            var p = ExpressionEx.Parameter<int>();
+            var p = Expression.Parameter<int>();
 
             var lambda = Expression.Lambda<Func<int, int>>
             (
-                ExpressionEx.Let(Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
+                Expression.Let(Expression.Multiply(p, p), i => Expression.Multiply(i, i)),
                 p
             );
 

@@ -16,12 +16,11 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void Against()
         {
-            var ctor = ExpressionEx.GetConstructor(() => new List<int>());
-            var add = ExpressionEx.GetMethod((List<int> list) => list.Add(0));
+            var ctor = Expression.GetConstructor(() => new List<int>());
+            var add = Expression.GetMethod((List<int> list) => list.Add(0));
 
-            var body = ExpressionEx.Against
+            var body = Expression.New(ctor).Against
             (
-                Expression.New(ctor),
                 expr => Expression.Call(expr, add, Expression.Constant(5)),
                 expr => Expression.Call(expr, add, Expression.Constant(10)),
                 expr => Expression.Call(expr, add, Expression.Constant(15)),
