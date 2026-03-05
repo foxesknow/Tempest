@@ -16,13 +16,13 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void DoWhile()
         {
-            var body = ExpressionEx.Let(ExpressionEx.Variable<int>("counter"), ExpressionEx.Constants.Int.Int_0, counter =>
+            var body = Expression.Let(ExpressionEx.Variable<int>("counter"), ExpressionEx.Constants.Int.Int_0, counter =>
             {
                 var predicate = Expression.LessThan(counter, Expression.Constant(10));
 
                 return Expression.Block
                 (
-                    ExpressionEx.DoWhile(predicate, (b, c) => 
+                    Expression.DoWhile(predicate, (b, c) => 
                     {
                         return Expression.Block
                         (
@@ -45,13 +45,13 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void DoWhile_LoopsOnce()
         {
-            var body = ExpressionEx.Let(ExpressionEx.Variable<int>("counter"), ExpressionEx.Constants.Int.Int_0, counter =>
+            var body = Expression.Let(ExpressionEx.Variable<int>("counter"), ExpressionEx.Constants.Int.Int_0, counter =>
             {
                 var predicate = Expression.LessThan(counter, Expression.Constant(0));
 
                 return Expression.Block
                 (
-                    ExpressionEx.DoWhile(predicate, (b, c) => 
+                    Expression.DoWhile(predicate, (b, c) => 
                     {
                         return Expression.Block
                         (

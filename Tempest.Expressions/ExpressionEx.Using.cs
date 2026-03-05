@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Tempest.Expressions
-{
-    public partial class ExpressionEx
-    {
-        private static readonly MethodInfo s_DisposableDispose = GetMethod((IDisposable d) => d.Dispose());
+namespace Tempest.Expressions;
 
+public partial class ExpressionEx
+{
+    private static readonly MethodInfo s_DisposableDispose = GetMethod((IDisposable d) => d.Dispose());
+
+    extension(Expression)
+    {
         /// <summary>
         /// Generates a using block
         /// </summary>
@@ -100,7 +102,7 @@ namespace Tempest.Expressions
                     Expression.Call(usingVariable, directDisposeMethod)
                 );
             }
-            
+        
             var block = Expression.Block
             (
                 new[]{usingVariable},

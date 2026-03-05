@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression instance)
     {
         /// <summary>
         /// Generates a call to a property only in the instance is not null
@@ -18,10 +20,9 @@ namespace Tempest.Expressions
         ///     instance?.Property
         /// </code>
         /// </example>
-        /// <param name="instance"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public static Expression ConditionalProperty(Expression instance, PropertyInfo property)
+        public Expression ConditionalProperty(PropertyInfo property)
         {
             if(instance == null) throw new ArgumentNullException(nameof(instance));
             if(property == null) throw new ArgumentNullException(nameof(property));

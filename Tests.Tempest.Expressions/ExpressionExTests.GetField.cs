@@ -14,21 +14,21 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void GetField_Static()
         {
-            var field = ExpressionEx.GetField(() => FieldTest.StaticField);
+            var field = Expression.GetField(() => FieldTest.StaticField);
             Assert.That(field, Is.Not.Null);
         }
 
         [Test]
         public void GetField_Instance()
         {
-            var field = ExpressionEx.GetField((FieldTest f) => f.InstanceField);
+            var field = Expression.GetField((FieldTest f) => f.InstanceField);
             Assert.That(field, Is.Not.Null);
         }
 
         [Test]
         public void GetField_Property()
         {
-            Assert.Catch(() => ExpressionEx.GetField(() => Console.WindowHeight));
+            Assert.Catch(() => Expression.GetField(() => Console.WindowHeight));
         }
 
         class FieldTest

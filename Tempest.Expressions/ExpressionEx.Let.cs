@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Generates a let binding ala F#

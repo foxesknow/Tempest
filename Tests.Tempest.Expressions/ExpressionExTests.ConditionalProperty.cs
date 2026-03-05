@@ -19,7 +19,7 @@ namespace Tests.Tempest.Expressions
             var p1 = ExpressionEx.Parameter<List<int>>();
             var property = ExpressionEx.GetProperty((List<int> list) => list.Count);
 
-            var call = ExpressionEx.ConditionalProperty(p1, property);
+            var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<List<int>, int?>>(call, p1);
             var function = lambda.Compile();
             
@@ -36,7 +36,7 @@ namespace Tests.Tempest.Expressions
             var p1 = ExpressionEx.Parameter<List<int>>();
             var property = ExpressionEx.GetProperty((List<int> list) => list.Count);
 
-            var call = ExpressionEx.ConditionalProperty(p1, property);
+            var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<List<int>, int?>>(call, p1);
             var function = lambda.Compile();
             
@@ -51,7 +51,7 @@ namespace Tests.Tempest.Expressions
             var p1 = ExpressionEx.Parameter<User>();
             var property = ExpressionEx.GetProperty((User user) => user.Name);
 
-            var call = ExpressionEx.ConditionalProperty(p1, property);
+            var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<User, string>>(call, p1);
             var function = lambda.Compile();
             
@@ -69,7 +69,7 @@ namespace Tests.Tempest.Expressions
             var p1 = ExpressionEx.Parameter<User>();
             var property = ExpressionEx.GetProperty((User user) => user.Name);
 
-            var call = ExpressionEx.ConditionalProperty(p1, property);
+            var call = p1.ConditionalProperty(property);
             var lambda = Expression.Lambda<Func<User, string>>(call, p1);
             var function = lambda.Compile();
             
@@ -86,19 +86,7 @@ namespace Tests.Tempest.Expressions
             var toString = ExpressionEx.GetMethod((string s) => s.ToString());
             var getLength = ExpressionEx.GetProperty((string s) => s.Length);
 
-            var chain = ExpressionEx.ConditionalProperty
-            (
-                ExpressionEx.ConditionalCall
-                (
-                    ExpressionEx.ConditionalProperty
-                    (
-                        p1, 
-                        getName
-                    ),
-                    toString
-                ),
-                getLength
-            );
+            var chain = p1.ConditionalProperty(getName).ConditionalCall(toString).ConditionalProperty(getLength);
 
             var lambda = Expression.Lambda<Func<User, int?>>(chain, p1);
             var function = lambda.Compile();

@@ -17,7 +17,7 @@ namespace Tests.Tempest.Expressions
         {
             var lhs = Expression.Parameter(typeof(int));
             var rhs = Expression.Parameter(typeof(int));
-            var body = ExpressionEx.Starship(lhs, rhs);
+            var body = Expression.Starship(lhs, rhs);
 
             var lambda = Expression.Lambda<Func<int, int, int>>(body, lhs, rhs);
             var function = lambda.Compile();
@@ -32,7 +32,7 @@ namespace Tests.Tempest.Expressions
         {
             var lhs = Expression.Parameter(typeof(string));
             var rhs = Expression.Parameter(typeof(string));
-            var body = ExpressionEx.Starship(lhs, rhs);
+            var body = Expression.Starship(lhs, rhs);
 
             var lambda = Expression.Lambda<Func<string, string, int>>(body, lhs, rhs);
             var function = lambda.Compile();

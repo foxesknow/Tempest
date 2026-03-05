@@ -25,7 +25,7 @@ namespace Tests.Tempest.Expressions
             static bool Make(params bool[] values)
             {
                 var parts = values.Select(b => Expression.Constant(b));
-                var body = ExpressionEx.AndAlso(parts);
+                var body = Expression.AndAlso(parts);
                 var lambda = Expression.Lambda<Func<bool>>(body);
 
                 var function = lambda.Compile();
@@ -36,8 +36,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void AndAlso_Not_Enough_Conditions()
         {
-            Assert.Catch(() => ExpressionEx.AndAlso(Expression.Constant(true)));
-            Assert.Catch(() => ExpressionEx.AndAlso());
+            Assert.Catch(() => Expression.AndAlso(Expression.Constant(true)));
+            Assert.Catch(() => Expression.AndAlso());
         }
     }
 }

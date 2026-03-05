@@ -17,24 +17,23 @@ namespace Tests.Tempest.Expressions
         public void Chain_Conditionals()
         {
             var p1 = ExpressionEx.Parameter<User>();
-            var getName = ExpressionEx.GetProperty((User user) => user.Name);
-            var stringToString = ExpressionEx.GetMethod((string s) => s.ToString());
-            var getLength = ExpressionEx.GetProperty((string s) => s.Length);
-            var intToString = ExpressionEx.GetMethod((int i) => i.ToString());
+            var getName = Expression.GetProperty((User user) => user.Name);
+            var stringToString = Expression.GetMethod((string s) => s.ToString());
+            var getLength = Expression.GetProperty((string s) => s.Length);
+            var intToString = Expression.GetMethod((int i) => i.ToString());
 
             /*
              * For a User, user, this is:
              * 
              *   user?.Name?.ToString()?.Length?.ToString()?.Length
              */
-            var chain = ExpressionEx.Chain
+            var chain = p1.Chain
             (
-                p1,
-                expr => ExpressionEx.ConditionalProperty(expr, getName),
-                expr => ExpressionEx.ConditionalCall(expr, stringToString),
-                expr => ExpressionEx.ConditionalProperty(expr, getLength),
-                expr => ExpressionEx.ConditionalCall(expr, intToString),
-                expr => ExpressionEx.ConditionalProperty(expr, getLength)
+                expr => expr.ConditionalProperty(getName),
+                expr => expr.ConditionalCall(stringToString),
+                expr => expr.ConditionalProperty(getLength),
+                expr => expr.ConditionalCall(intToString),
+                expr => expr.ConditionalProperty(getLength)
             );
 
             var lambda = Expression.Lambda<Func<User, int?>>(chain, p1);

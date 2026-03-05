@@ -5,9 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Creates an expression where the body will be executed a specific number of times
@@ -27,7 +29,7 @@ namespace Tempest.Expressions
         {
             if(count == null) throw new ArgumentNullException(nameof(count));
             if(bodyBuilder == null) throw new ArgumentNullException(nameof(bodyBuilder));
-            
+        
             var repeat = MakeLabel("repeat");
 
             if(count.Type.IsIntegral() == false)

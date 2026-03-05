@@ -25,7 +25,7 @@ namespace Tests.Tempest.Expressions
             static bool Make(params bool[] values)
             {
                 var parts = values.Select(b => Expression.Constant(b));
-                var body = ExpressionEx.OrElse(parts);
+                var body = Expression.OrElse(parts);
                 var lambda = Expression.Lambda<Func<bool>>(body);
 
                 var function = lambda.Compile();
@@ -36,8 +36,8 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void OrElse_Not_Enough_Conditions()
         {
-            Assert.Catch(() => ExpressionEx.OrElse(Expression.Constant(true)));
-            Assert.Catch(() => ExpressionEx.OrElse());
+            Assert.Catch(() => Expression.OrElse(Expression.Constant(true)));
+            Assert.Catch(() => Expression.OrElse());
         }
     }
 }

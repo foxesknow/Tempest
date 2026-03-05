@@ -16,7 +16,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_1()
         {
-            var tuple = ExpressionEx.MakeTuple(Expression.Constant(10));
+            var tuple = Expression.MakeTuple(Expression.Constant(10));
             var lambda = Expression.Lambda<Func<ValueTuple<int>>>(tuple);
             var function = lambda.Compile();
 
@@ -27,7 +27,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_2()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12)
@@ -43,7 +43,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_3()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),
@@ -61,7 +61,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_4()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),
@@ -81,7 +81,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_5()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),
@@ -103,7 +103,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_6()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),
@@ -127,7 +127,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_7()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),
@@ -153,7 +153,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_Chain_1()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),
@@ -185,7 +185,7 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void MakeTuple_Chain_2()
         {
-            var tuple = ExpressionEx.MakeTuple
+            var tuple = Expression.MakeTuple
             (
                 Expression.Constant(10),
                 Expression.Constant(12),

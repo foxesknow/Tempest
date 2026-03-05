@@ -18,7 +18,7 @@ namespace Tests.Tempest.Expressions
         public void Using_Class_Implicit()
         {
             var p = ExpressionEx.Parameter<DisposableClass_Implicit>();
-            var body = ExpressionEx.Using(p, _ => Expression.Constant("hello"));
+            var body = Expression.Using(p, _ => Expression.Constant("hello"));
             var lambda = Expression.Lambda<Action<DisposableClass_Implicit>>(body, p);
             var action = lambda.Compile();
 
@@ -33,7 +33,7 @@ namespace Tests.Tempest.Expressions
         public void Using_Class_Explicit()
         {
             var p = ExpressionEx.Parameter<DisposableClass_Explicit>();
-            var body = ExpressionEx.Using(p, _ => Expression.Constant("hello"));
+            var body = Expression.Using(p, _ => Expression.Constant("hello"));
             var lambda = Expression.Lambda<Action<DisposableClass_Explicit>>(body, p);
             var action = lambda.Compile();
 
@@ -53,7 +53,7 @@ namespace Tests.Tempest.Expressions
             var body = Expression.Block
             (
                 new[]{v},
-                ExpressionEx.Using(vInit, _ => Expression.Constant("hi"))
+                Expression.Using(vInit, _ => Expression.Constant("hi"))
             );
 
             var lambda = Expression.Lambda<Func<string>>(body);
@@ -66,7 +66,7 @@ namespace Tests.Tempest.Expressions
         public void Using_Struct_Implicit()
         {
             var p = ExpressionEx.Parameter<DisposableStruct_Implicit>();
-            var body = ExpressionEx.Using(p, _ => Expression.Constant("hello"));
+            var body = Expression.Using(p, _ => Expression.Constant("hello"));
             var lambda = Expression.Lambda<Action<DisposableStruct_Implicit>>(body, p);
             var action = lambda.Compile();
 
@@ -82,7 +82,7 @@ namespace Tests.Tempest.Expressions
         public void Using_Struct_Explicit()
         {
             var p = ExpressionEx.Parameter<DisposableStruct_Explicit>();
-            var body = ExpressionEx.Using(p, _ => Expression.Constant("hello"));
+            var body = Expression.Using(p, _ => Expression.Constant("hello"));
             var lambda = Expression.Lambda<Action<DisposableStruct_Explicit>>(body, p);
             var action = lambda.Compile();
 

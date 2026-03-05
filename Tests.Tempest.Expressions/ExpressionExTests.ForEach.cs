@@ -20,9 +20,9 @@ namespace Tests.Tempest.Expressions
             var parameter = ExpressionEx.Parameter<List<string>>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine((object)null);
-            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+            var writeLine = Expression.GetMethod(consoleWriteLine);
 
-            var body = ExpressionEx.ForEach
+            var body = Expression.ForEach
             (
                 parameter,
                 (v, b, c) => Expression.Call(null, writeLine, v)
@@ -41,9 +41,9 @@ namespace Tests.Tempest.Expressions
             var parameter = ExpressionEx.Parameter<CustomSequence>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine(1);
-            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+            var writeLine = Expression.GetMethod(consoleWriteLine);
 
-            var body = ExpressionEx.ForEach
+            var body = Expression.ForEach
             (
                 parameter,
                 (v, b, c) => Expression.Call(null, writeLine, v)
@@ -63,9 +63,9 @@ namespace Tests.Tempest.Expressions
             var parameter = ExpressionEx.Parameter<CustomSequence_Explicit>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine(1);
-            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+            var writeLine = Expression.GetMethod(consoleWriteLine);
 
-            var body = ExpressionEx.ForEach
+            var body = Expression.ForEach
             (
                 parameter,
                 (v, b, c) => Expression.Call(null, writeLine, v)
@@ -85,9 +85,9 @@ namespace Tests.Tempest.Expressions
             var parameter = ExpressionEx.Parameter<CustomSequence_Disposable>();
 
             Expression<Action> consoleWriteLine = () => Console.WriteLine(1);
-            var writeLine = ExpressionEx.GetMethod(consoleWriteLine);
+            var writeLine = Expression.GetMethod(consoleWriteLine);
 
-            var body = ExpressionEx.ForEach
+            var body = Expression.ForEach
             (
                 parameter,
                 (v, b, c) => Expression.Call(null, writeLine, v)

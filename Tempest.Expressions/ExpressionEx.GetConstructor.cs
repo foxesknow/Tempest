@@ -6,12 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
-         /// <summary>
-        /// Extracts the ConstructorInfo from a lamda representing a a call to "new"
+        /// <summary>
+        /// Extracts the ConstructorInfo from a lamda representing a call to "new"
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="delegate"></param>

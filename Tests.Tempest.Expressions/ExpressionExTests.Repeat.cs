@@ -19,7 +19,7 @@ namespace Tests.Tempest.Expressions
             var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
-            var repeat = ExpressionEx.Repeat(Expression.Constant(5), (b, c) => Expression.PreIncrementAssign(counter));
+            var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => Expression.PreIncrementAssign(counter));
 
             var block = Expression.Block
             (
@@ -41,7 +41,7 @@ namespace Tests.Tempest.Expressions
             var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
-            var repeat = ExpressionEx.Repeat(Expression.Constant(5), (b, c) => 
+            var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => 
             {
                 return Expression.Block
                 (
@@ -70,7 +70,7 @@ namespace Tests.Tempest.Expressions
             var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
-            var repeat = ExpressionEx.Repeat(Expression.Constant((byte)5), (b, c) => Expression.PreIncrementAssign(counter));
+            var repeat = Expression.Repeat(Expression.Constant((byte)5), (b, c) => Expression.PreIncrementAssign(counter));
 
             var block = Expression.Block
             (
@@ -92,7 +92,7 @@ namespace Tests.Tempest.Expressions
             var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
-            var repeat = ExpressionEx.Repeat(Expression.Constant(5), (b, c) => 
+            var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => 
             {
                 return Expression.Block
                 (
@@ -125,7 +125,7 @@ namespace Tests.Tempest.Expressions
             var counter = ExpressionEx.Variable<int>("a");
             var init = Expression.Assign(counter, Expression.Constant(0));
 
-            var repeat = ExpressionEx.Repeat(Expression.Constant(5), (b, c) => 
+            var repeat = Expression.Repeat(Expression.Constant(5), (b, c) => 
             {
                 return Expression.Block
                 (

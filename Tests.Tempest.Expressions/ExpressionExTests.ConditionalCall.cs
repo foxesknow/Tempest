@@ -17,9 +17,9 @@ namespace Tests.Tempest.Expressions
         public void ConditionCall_VoidMethod()
         {
             var p1 = ExpressionEx.Parameter<List<int>>();
-            var method = ExpressionEx.GetMethod((List<int> list) => list.Clear());
+            var method = Expression.GetMethod((List<int> list) => list.Clear());
 
-            var call = ExpressionEx.ConditionalCall(p1, method);
+            var call = p1.ConditionalCall(method);
             var lambda = Expression.Lambda<Action<List<int>>>(call, p1);
             var function = lambda.Compile();
             
@@ -35,7 +35,7 @@ namespace Tests.Tempest.Expressions
             var p1 = ExpressionEx.Parameter<List<int>>();
             var method = ExpressionEx.GetMethod((List<int> list) => list.GetRange(0, 4));
 
-            var call = ExpressionEx.ConditionalCall(p1, method, Expression.Constant(0), Expression.Constant(4));
+            var call = p1.ConditionalCall(method, Expression.Constant(0), Expression.Constant(4));
             var lambda = Expression.Lambda<Func<List<int>, List<int>>>(call, p1);
             var function = lambda.Compile();
             
@@ -53,7 +53,7 @@ namespace Tests.Tempest.Expressions
             var name = Expression.Constant("Bob");
             var method = ExpressionEx.GetMethod((string s) => s.IndexOf("f"));
 
-            var call = ExpressionEx.ConditionalCall(target, method, name);
+            var call = target.ConditionalCall(method, name);
             var lambda = Expression.Lambda<Func<int?>>(call);
             var function = lambda.Compile();
             var answer = function();
@@ -69,7 +69,7 @@ namespace Tests.Tempest.Expressions
             var name = Expression.Constant("Bob");
             var method = ExpressionEx.GetMethod((string s) => s.IndexOf("f"));
 
-            var call = ExpressionEx.ConditionalCall(target, method, name);
+            var call = target.ConditionalCall(method, name);
             var lambda = Expression.Lambda<Func<int?>>(call);
             var function = lambda.Compile();
             var answer = function();
@@ -84,7 +84,7 @@ namespace Tests.Tempest.Expressions
             var index = Expression.Constant(9);
             var method = ExpressionEx.GetMethod((string s) => s.Substring(9));
 
-            var call = ExpressionEx.ConditionalCall(target, method, index);
+            var call = target.ConditionalCall(method, index);
             var lambda = Expression.Lambda<Func<string>>(call);
             var function = lambda.Compile();
             var answer = function();
@@ -100,7 +100,7 @@ namespace Tests.Tempest.Expressions
             var index = Expression.Constant(9);
             var method = ExpressionEx.GetMethod((string s) => s.Substring(9));
 
-            var call = ExpressionEx.ConditionalCall(target, method, index);
+            var call = target.ConditionalCall(method, index);
             var lambda = Expression.Lambda<Func<string>>(call);
             var function = lambda.Compile();
             var answer = function();
@@ -114,7 +114,7 @@ namespace Tests.Tempest.Expressions
             var p1 = Expression.Parameter(typeof(int?));
             var method = ExpressionEx.GetMethod((int s) => s.ToString());
 
-            var call = ExpressionEx.ConditionalCall(p1, method);
+            var call = p1.ConditionalCall(method);
             var lambda = Expression.Lambda<Func<int?, string>>(call, p1);
             var function = lambda.Compile();
             var answer = function(10);
@@ -143,7 +143,7 @@ namespace Tests.Tempest.Expressions
             var p1 = Expression.Parameter(typeof(int?));
             var method = ExpressionEx.GetMethod((int s) => s.GetHashCode());
 
-            var call = ExpressionEx.ConditionalCall(p1, method);
+            var call = p1.ConditionalCall(method);
             var lambda = Expression.Lambda<Func<int?, int?>>(call, p1);
             var function = lambda.Compile();
             var answer = function(10);
@@ -158,7 +158,7 @@ namespace Tests.Tempest.Expressions
             var p1 = Expression.Parameter(typeof(int?));
             var method = ExpressionEx.GetMethod((int s) => s.GetHashCode());
 
-            var call = ExpressionEx.ConditionalCall(p1, method);
+            var call = p1.ConditionalCall(method);
             var lambda = Expression.Lambda<Func<int?, int?>>(call, p1);
             var function = lambda.Compile();
             var answer = function(null);
@@ -172,7 +172,7 @@ namespace Tests.Tempest.Expressions
             var p1 = Expression.Parameter(typeof(User));
             var method = ExpressionEx.GetMethod((User s) => s.ToString());
 
-            var call = ExpressionEx.ConditionalCall(p1, method);
+            var call = p1.ConditionalCall(method);
             var lambda = Expression.Lambda<Func<User, string>>(call, p1);
             var function = lambda.Compile();
             

@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
 
-namespace Tempest.Expressions
-{
-    public static partial class ExpressionEx
-    {
-        private static readonly MethodInfo s_MonitorEnter = GetMethod(() => Monitor.Enter(null!, ref DiscardableRef<bool>.Value));
-        private static readonly MethodInfo s_MonitorExit = GetMethod(() => Monitor.Exit(null!));
+namespace Tempest.Expressions;
 
+public static partial class ExpressionEx
+{
+    private static readonly MethodInfo s_MonitorEnter = GetMethod(() => Monitor.Enter(null!, ref DiscardableRef<bool>.Value));
+    private static readonly MethodInfo s_MonitorExit = GetMethod(() => Monitor.Exit(null!));
+
+    extension(Expression)
+    {
         /// <summary>
         /// Acquires a lock and executes a body
         /// </summary>

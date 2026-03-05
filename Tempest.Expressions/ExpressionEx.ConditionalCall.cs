@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression instance)
     {
         /// <summary>
         /// Generates a call to a method only if the instance is not null
@@ -18,11 +20,10 @@ namespace Tempest.Expressions
         ///     instance?.Method(p1, p2, ...)
         /// </code>
         /// </example>
-        /// <param name="instance"></param>
         /// <param name="method"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public static Expression ConditionalCall(Expression instance, MethodInfo method, params Expression[]? arguments)
+        public Expression ConditionalCall(MethodInfo method, params Expression[]? arguments)
         {
             if(instance == null) throw new ArgumentNullException(nameof(instance));
             if(method == null) throw new ArgumentNullException(nameof(method));
@@ -36,7 +37,7 @@ namespace Tempest.Expressions
                 true => (returnType == typeof(void) ? Constants.Void : Expression.Default(typeof(Nullable<>).MakeGenericType(returnType))),
                 false => Expression.Default(method.ReturnType)
             };
-    
+
             var tempName = MakeTemp("condTarget");
 
             if(instance.Type.IsValueType)

@@ -8,9 +8,11 @@ using System.Reflection;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public partial class ExpressionEx
 {
-    public partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Creates a foreach expression that enumerates over a sequence

@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Makes a tuple consisting of a test and the expression to execute if the test is true

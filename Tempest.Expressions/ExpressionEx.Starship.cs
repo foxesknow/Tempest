@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// An implementation of lhs <![CDATA[<=>]]> rhs :
@@ -33,10 +35,10 @@ namespace Tempest.Expressions
 
             var type = lhs.Type;
             var comparerType = typeof(Comparer<>).MakeGenericType(type);
-            
+        
             var getComparer = comparerType.GetProperty("Default")!;
             var compareMethod = getComparer.PropertyType.GetMethod("Compare")!;
-            
+        
             var expression = Let(Expression.Property(null, getComparer), comparer =>
             {
                 return Expression.Call(comparer, compareMethod, lhs, rhs);

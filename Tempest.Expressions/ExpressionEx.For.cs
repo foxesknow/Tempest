@@ -7,9 +7,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Collections;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Generates a for loop.

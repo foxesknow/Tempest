@@ -25,10 +25,10 @@ namespace Tests.Tempest.Expressions
                 (
                     new[]
                     {
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(0)), Expression.Return(@return, Expression.Constant("zero"))),
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(1)), Expression.Return(@return, Expression.Constant("one"))),
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(2)), Expression.Return(@return, Expression.Constant("two"))),
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(3)), Expression.Return(@return, Expression.Constant("three"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(0)), Expression.Return(@return, Expression.Constant("zero"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(1)), Expression.Return(@return, Expression.Constant("one"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(2)), Expression.Return(@return, Expression.Constant("two"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(3)), Expression.Return(@return, Expression.Constant("three"))),
                     }
                 ),
                 Expression.Label(@return, Expression.Constant("nothing"))
@@ -56,10 +56,10 @@ namespace Tests.Tempest.Expressions
                 (
                     new[]
                     {
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(0)), Expression.Return(@return, Expression.Constant("zero"))),
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(1)), Expression.Return(@return, Expression.Constant("one"))),
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(2)), Expression.Return(@return, Expression.Constant("two"))),
-                        ExpressionEx.MakeIfThen(Expression.Equal(p, Expression.Constant(3)), Expression.Return(@return, Expression.Constant("three"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(0)), Expression.Return(@return, Expression.Constant("zero"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(1)), Expression.Return(@return, Expression.Constant("one"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(2)), Expression.Return(@return, Expression.Constant("two"))),
+                        Expression.MakeIfThen(Expression.Equal(p, Expression.Constant(3)), Expression.Return(@return, Expression.Constant("three"))),
                     },
                     Expression.Return(@return, Expression.Constant("unknown"))
                 ),

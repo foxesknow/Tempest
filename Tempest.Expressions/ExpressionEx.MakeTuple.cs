@@ -5,9 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Create a tuple holding the specified values
@@ -33,7 +35,7 @@ namespace Tempest.Expressions
 
             var stack = new Stack<List<Expression>>();
             List<Expression>? currentValues = null;
-            
+        
             for(int i = 0; i < tupleValues.Count; i++)
             {
                 var expression = tupleValues[i];

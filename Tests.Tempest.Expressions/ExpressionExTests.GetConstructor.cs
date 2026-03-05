@@ -14,14 +14,14 @@ namespace Tests.Tempest.Expressions
         [Test]
         public void GetConstructor()
         {
-            var constructor = ExpressionEx.GetConstructor(() => new List<int>());
+            var constructor = Expression.GetConstructor(() => new List<int>());
             Assert.That(constructor, Is.Not.Null);
         }
 
         [Test]
         public void GetConstructor_NotNew()
         {
-            Assert.Catch(() => ExpressionEx.GetConstructor(() => "hello"));
+            Assert.Catch(() => Expression.GetConstructor(() => "hello"));
         }
     }
 }

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Threading;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Defers running an expression until after the body has been evaluates.

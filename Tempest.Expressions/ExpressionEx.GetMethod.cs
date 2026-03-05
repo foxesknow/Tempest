@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tempest.Expressions
+namespace Tempest.Expressions;
+
+public static partial class ExpressionEx
 {
-    public static partial class ExpressionEx
+    extension(Expression)
     {
         /// <summary>
         /// Extracts the MethodInfo from a lambda representing a method call.

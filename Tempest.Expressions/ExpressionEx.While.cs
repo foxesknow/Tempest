@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
-namespace Tempest.Expressions
-{
-    public static partial class ExpressionEx
-    {
-        /// <summary>
-        /// A delegate that creates a while loop
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <param name="bodyBuilder"></param>
-        /// <returns></returns>
-        private delegate Expression WhileBuilder(Expression predicate, LoopBodyBuilder bodyBuilder);
+namespace Tempest.Expressions;
 
+public static partial class ExpressionEx
+{
+    /// <summary>
+    /// A delegate that creates a while loop
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <param name="bodyBuilder"></param>
+    /// <returns></returns>
+    private delegate Expression WhileBuilder(Expression predicate, LoopBodyBuilder bodyBuilder);
+    
+    extension(Expression)
+    {
         /// <summary>
         /// Generates a while loop
         /// </summary>
