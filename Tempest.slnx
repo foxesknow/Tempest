@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Project Path="Tempest.Expressions/Tempest.Expressions.csproj" />
+  <Project Path="Tempest.Language/Tempest.Language.csproj" />
+  <Project Path="Tempest.TaskTypes/Tempest.TaskTypes.csproj" />
+  <Project Path="Tests.Tempest.Expressions/Tests.Tempest.Expressions.csproj" />
+  <Project Path="Tests.Tempest.Language/Tests.Tempest.Language.csproj" />
+  <Project Path="Tests.Tempest.TaskTypes/Tests.Tempest.TaskTypes.csproj" />
+</Solution>
