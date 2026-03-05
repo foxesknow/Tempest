@@ -193,6 +193,8 @@ namespace Tests.Tempest.Expressions
 
             public string Name{get;}
 
+            public Birthday Birthday{get; set;}
+
             public int OverloadCalls{get; private set;}
 
             private void Touch()
@@ -245,6 +247,12 @@ namespace Tests.Tempest.Expressions
             {
                 return Name;
             }
-        }    
+        }
+        
+        struct Birthday
+        {
+            public required DateTime When{get; init; }
+            public required int Age{get; set; }
+        }
     }
 }

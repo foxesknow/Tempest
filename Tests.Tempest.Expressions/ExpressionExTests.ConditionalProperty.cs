@@ -98,5 +98,38 @@ namespace Tests.Tempest.Expressions
             Assert.That(answer, Is.Not.Null);
             Assert.That(answer.Value, Is.EqualTo(6));
         }
+
+        [Test]
+        public void Conditional_Calls_Properties_NullName()
+        {
+            var p1 = Expression.Parameter<User>();
+            var getName = Expression.GetProperty((User user) => user.Name);
+            var toString = Expression.GetMethod((string s) => s.ToString());
+            var getLength = Expression.GetProperty((string s) => s.Length);
+
+            var chain = p1.ConditionalProperty(getName).ConditionalCall(toString).ConditionalProperty(getLength);
+
+            var lambda = Expression.Lambda<Func<User, int?>>(chain, p1);
+            var function = lambda.Compile();
+            
+            var user = new User(null);
+            var answer = function(user);
+            Assert.That(answer, Is.Null);
+        }
+
+        [Test]
+        public void Conditional_Calls_Properties_NullName_ValueType()
+        {
+            var p1 = Expression.Parameter<User>();
+            var getBirthday = Expression.GetProperty((User user) => user.Birthday);
+            var getAge = Expression.GetProperty((Birthday b) => b.Age);
+            
+            var chain = p1.ConditionalProperty(getBirthday).ConditionalProperty(getAge);
+
+            var lambda = Expression.Lambda<Func<User, int?>>(chain, p1);
+            var function = lambda.Compile();
+            
+            Assert.That(function(null), Is.Null);
+        }
     }
 }
